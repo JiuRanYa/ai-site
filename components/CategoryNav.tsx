@@ -26,8 +26,8 @@ export default function CategoryNav() {
      <button
       key={category.id}
       className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === category.id
-        ? 'bg-black text-white shadow-lg'
-        : 'bg-white text-gray-600 border border-gray-200 hover:border-gray-300 hover:shadow-md'
+       ? 'bg-black text-white shadow-lg'
+       : 'bg-white text-gray-600 border border-gray-200 hover:border-gray-300 hover:shadow-md'
        }`}
       onClick={() => setActiveCategory(category.id)}
      >
