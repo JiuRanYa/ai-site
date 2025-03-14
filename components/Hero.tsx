@@ -1,6 +1,7 @@
 import { CoolMode } from './magicui/cool-mode'
 
 export default function Hero() {
+
  return (
   <section className="relative min-h-[100vh] flex items-center justify-center bg-gradient-to-b from-white to-gray-50 overflow-hidden">
    <div className="absolute inset-0 w-full h-full">
@@ -8,9 +9,12 @@ export default function Hero() {
    </div>
 
    <div className="container relative mx-auto px-4 text-center">
-    <span className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-300/80 bg-clip-text text-center text-8xl font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10">
-     Explore AI Source
-    </span>
+    <div className="flex items-center justify-center">
+     <span className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-300/80 bg-clip-text text-center text-8xl font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10">
+      Explore AI Source
+     </span>
+    </div>
+
     <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mb-12 font-light mt-6">
      Discover and share the best AI resources for designers
     </p>
