@@ -14,6 +14,13 @@ const eslintConfig = [
   {
     rules: {
       'react/no-unescaped-entities': 'off',
+      'indent': ['error', 1],
+      'react/jsx-indent': ['error', 1],
+      'react/jsx-indent-props': ['error', 1],
+      'linebreak-style': ['error', 'unix'],
+      'quotes': ['error', 'single'],
+      'semi': ['error', 'never'],
+      'comma-dangle': ['error', 'never']
     }
   }
 ];
