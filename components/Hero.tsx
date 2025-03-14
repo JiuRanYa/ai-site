@@ -1,3 +1,5 @@
+import { CoolMode } from './magicui/cool-mode'
+
 export default function Hero() {
  return (
   <section className="relative min-h-[100vh] flex items-center justify-center bg-gradient-to-b from-white to-gray-50 overflow-hidden">
@@ -14,12 +16,12 @@ export default function Hero() {
     </p>
 
     <div className="flex flex-wrap justify-center gap-6">
-     <a
-      href="#resources"
-      className="bg-black text-white px-8 py-3 rounded-full text-lg hover:bg-gray-900 transition shadow-lg hover:shadow-xl"
-     >
-      Get Started
-     </a>
+
+     <CoolMode>
+      <a className="bg-black text-white px-8 py-3 rounded-full text-lg hover:bg-gray-900 transition shadow-lg hover:shadow-xl">
+       Get Started
+      </a>
+     </CoolMode>
      <a
       href="/guide"
       className="bg-white text-gray-800 px-8 py-3 rounded-full text-lg border border-gray-200 hover:border-gray-300 transition shadow-lg hover:shadow-xl"
@@ -28,6 +30,8 @@ export default function Hero() {
      </a>
     </div>
    </div>
+
+
   </section>
  )
 } 
