@@ -51,7 +51,7 @@ export default function Hero() {
        href="/guide"
        className="bg-white text-gray-800 px-8 py-3 rounded-full text-lg border border-gray-200 hover:border-gray-300 transition shadow-lg hover:shadow-xl"
       >
-       了解更多
+       Know More
       </a>
      </motion.div>
     </div>
@@ -68,10 +68,10 @@ export default function Hero() {
       className="text-center mb-16"
      >
       <h2 className="text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-gray-800 to-gray-600">
-       为什么选择 AI Navigator
+       Why Choose AI For Developer
       </h2>
       <p className="text-gray-600 max-w-2xl mx-auto">
-       我们精心策划并持续更新最实用的 AI 工具，帮助设计师和创作者提升工作效率
+       We carefully curate and continuously update the most practical AI tools to help developers enhance their work efficiency
       </p>
      </motion.div>
 
@@ -130,32 +130,32 @@ export default function Hero() {
 const features = [
  {
   icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>,
-  title: '精选工具',
-  description: '我们严格筛选并持续更新最实用的 AI 工具，确保每一个推荐都经过实际验证。'
+  title: 'Curated Tools',
+  description: 'We carefully curate and continuously update the most practical AI tools, ensuring that each recommendation is thoroughly validated.'
  },
  {
   icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>,
-  title: '分类清晰',
-  description: '工具按照使用场景和功能特点进行分类，帮助您快速找到最适合的工具。'
+  title: 'Clear Classification',
+  description: 'Tools are classified by usage scenarios and functional features to help you quickly find the most suitable tool.'
  },
  {
   icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" /></svg>,
-  title: '使用指南',
-  description: '详细的工具使用指南和最佳实践，让您快速上手并发挥 AI 工具的最大价值。'
+  title: 'Usage Guide',
+  description: 'Detailed tool usage guides and best practices to help you get started and maximize the value of AI tools.'
  }
 ]
 
 const stats = [
  {
   value: '100+',
-  label: '精选工具'
+  label: 'Curated Tools'
  },
  {
   value: '10k+',
-  label: '活跃用户'
+  label: 'Active Users'
  },
  {
   value: '50+',
-  label: '使用场景'
+  label: 'Usage Scenarios'
  }
 ] 
