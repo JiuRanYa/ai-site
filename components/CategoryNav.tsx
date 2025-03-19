@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 
 const categories = [
- { id: 'discover', name: 'Discover', className: 'bg-gray-100 text-gray-800' },
+ { id: 'discover', name: 'Discover' },
  { id: 'animation', name: 'Animation' },
  { id: 'branding', name: 'Branding' },
  { id: 'illustration', name: 'Illustration' },
@@ -26,7 +26,7 @@ export default function CategoryNav() {
       key={category.id}
       href={`/category/${category.id}`}
       className={`px-5 py-3 rounded-full text-base transition-colors ${
-       category.id === 'discover' 
+       activeCategory === category.id 
         ? 'bg-gray-100 text-gray-800 font-medium' 
         : 'text-gray-700 hover:text-gray-900'
       }`}
