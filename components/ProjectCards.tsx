@@ -160,17 +160,25 @@ export default function ProjectCards() {
     ))}
    </div>
    
-   {/* 加载指示器 */}
+   {/* 简化的加载指示器 */}
    <div ref={loaderRef} className="mt-12 text-center">
     {loading && (
-     <div className="flex justify-center items-center space-x-2">
-      <div className="w-3 h-3 rounded-full animate-pulse bg-gray-400"></div>
-      <div className="w-3 h-3 rounded-full animate-pulse bg-gray-400" style={{ animationDelay: '0.2s' }}></div>
-      <div className="w-3 h-3 rounded-full animate-pulse bg-gray-400" style={{ animationDelay: '0.4s' }}></div>
-     </div>
+     <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="py-4"
+     >
+      <p className="text-gray-600 font-medium">Loading More...</p>
+     </motion.div>
     )}
     {!hasMore && projects.length > 0 && (
-     <p className="text-gray-500">No more projects to load</p>
+     <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+     >
+      <p className="text-gray-500">No more projects to load</p>
+     </motion.div>
     )}
    </div>
   </div>
