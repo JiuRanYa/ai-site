@@ -8,21 +8,21 @@ const projects = [
   id: 'heritage',
   title: 'Heritage & Co. Vintage Lifestyle Collection',
   tags: ['E-commerce', 'Creative'],
-  iframe: 'https://www.baidu.com',
+  iframe: 'https://readdy.ai/',
   preview: 'https://example.com/heritage'
  },
  {
   id: 'nature',
   title: 'Nature-Inspired Digital Solutions',
   tags: ['Agency', 'Modern'],
-  iframe: 'https://www.baidu.com',
+  iframe: 'https://readdy.ai/',
   preview: 'https://example.com/nature'
  },
  {
   id: 'raw',
   title: 'Raw Artistic Expression Gallery',
   tags: ['Art', 'Modern'],
-  iframe: 'https://www.baidu.com',
+  iframe: 'https://readdy.ai/',
   preview: 'https://example.com/raw'
  }
 ]
@@ -37,7 +37,7 @@ export default function ProjectCards() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow"
+      className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow flex flex-col h-full"
      >
       <div className="aspect-[4/3] w-full bg-gray-100 relative">
        <iframe 
@@ -50,24 +50,26 @@ export default function ProjectCards() {
        ></iframe>
       </div>
 
-      <div className="p-6">
-       <h3 className="text-lg font-medium text-gray-900 mb-3">
-        {project.title}
-       </h3>
-       <div className="flex gap-2 mb-4">
-        {project.tags.map((tag) => (
-         <span
-          key={tag}
-          className="px-3 py-1 bg-gray-100 text-gray-600 text-xs rounded-full"
-         >
-          {tag}
-         </span>
-        ))}
+      <div className="p-6 flex-1 flex flex-col">
+       <div className="flex-1">
+        <h3 className="text-lg font-medium text-gray-900 mb-3">
+         {project.title}
+        </h3>
+        <div className="flex flex-wrap gap-2 mb-4">
+         {project.tags.map((tag) => (
+          <span
+           key={tag}
+           className="px-3 py-1 bg-gray-100 text-gray-600 text-xs rounded-full"
+          >
+           {tag}
+          </span>
+         ))}
+        </div>
        </div>
 
        <Link 
         href={project.preview}
-        className="block w-full text-center py-3 bg-black text-white rounded-full hover:bg-gray-800 transition-colors font-medium"
+        className="block w-full text-center py-3 bg-black text-white rounded-full hover:bg-gray-800 transition-colors font-medium mt-auto"
        >
         <span className="flex items-center justify-center gap-2">
          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
