@@ -1,6 +1,8 @@
 'use client'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import CategoryNav from './CategoryNav'
+import ProjectCards from './ProjectCards'
 
 export default function Hero() {
  return (
@@ -68,6 +70,26 @@ export default function Hero() {
         </div>
        </div>
       </div>
+     </motion.div>
+     
+     {/* 分类导航栏 */}
+     <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.4, ease: 'easeOut' }}
+      className="w-full"
+     >
+      <CategoryNav />
+     </motion.div>
+     
+     {/* 项目卡片展示 */}
+     <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
+      className="w-full"
+     >
+      <ProjectCards />
      </motion.div>
     </div>
    </section>

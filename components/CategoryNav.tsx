@@ -1,38 +1,42 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 
 const categories = [
- { id: 'all', name: '全部' },
- { id: 'chatbots', name: '聊天机器人' },
- { id: 'image', name: '图像生成' },
- { id: 'video', name: '视频创作' },
- { id: 'audio', name: '音频工具' },
- { id: 'writing', name: '写作助手' },
- { id: 'productivity', name: '生产力工具' },
- { id: 'coding', name: '编程开发' },
+ { id: 'discover', name: 'Discover', className: 'bg-gray-100 text-gray-800' },
+ { id: 'animation', name: 'Animation' },
+ { id: 'branding', name: 'Branding' },
+ { id: 'illustration', name: 'Illustration' },
+ { id: 'mobile', name: 'Mobile' },
+ { id: 'print', name: 'Print' },
+ { id: 'product-design', name: 'Product Design' },
+ { id: 'typography', name: 'Typography' },
+ { id: 'web-design', name: 'Web Design' },
 ]
 
 export default function CategoryNav() {
- const [activeCategory, setActiveCategory] = useState('all')
+ const [activeCategory, setActiveCategory] = useState('discover')
 
  return (
-  <div className="mb-12">
-   <h2 className="text-4xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-gray-700 to-gray-900">
-    AI工具分类
-   </h2>
-   <div className="flex flex-wrap gap-3">
+  <div className="py-6 px-4 mt-8 mb-6 overflow-x-auto">
+   <div className="flex max-w-7xl mx-auto items-center gap-4">
     {categories.map((category) => (
-     <button
+     <Link 
       key={category.id}
-      className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === category.id
-       ? 'bg-black text-white shadow-lg'
-       : 'bg-white text-gray-600 border border-gray-200 hover:border-gray-300 hover:shadow-md'
-       }`}
-      onClick={() => setActiveCategory(category.id)}
+      href={`/category/${category.id}`}
+      className={`px-5 py-3 rounded-full text-base transition-colors ${
+       category.id === 'discover' 
+        ? 'bg-gray-100 text-gray-800 font-medium' 
+        : 'text-gray-700 hover:text-gray-900'
+      }`}
+      onClick={(e) => {
+       e.preventDefault()
+       setActiveCategory(category.id)
+      }}
      >
       {category.name}
-     </button>
+     </Link>
     ))}
    </div>
   </div>
