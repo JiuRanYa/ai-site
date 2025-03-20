@@ -4,19 +4,17 @@ import { useState } from 'react'
 import Link from 'next/link'
 
 const categories = [
- { id: 'discover', name: 'Discover' },
- { id: 'animation', name: 'Animation' },
- { id: 'branding', name: 'Branding' },
- { id: 'illustration', name: 'Illustration' },
- { id: 'mobile', name: 'Mobile' },
- { id: 'print', name: 'Print' },
- { id: 'product-design', name: 'Product Design' },
- { id: 'typography', name: 'Typography' },
+ { id: 'today', name: 'Today' },
+ { id: 'hot', name: 'Hot' },
+ { id: 'new', name: 'New' },
+ { id: 'free', name: 'Free' },
+ { id: 'paid', name: 'Paid' },
  { id: 'web-design', name: 'Web Design' },
+ { id: 'web-development', name: 'Web Development' },
 ]
 
 export default function CategoryNav({ className }: { className?: string }) {
- const [activeCategory, setActiveCategory] = useState('discover')
+ const [activeCategory, setActiveCategory] = useState('today')
 
  return (
   <div className={`px-4 overflow-x-auto ${className}`}>
