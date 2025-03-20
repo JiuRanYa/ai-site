@@ -17,8 +17,8 @@ export default function Header() {
        </button>
       </div>
       
-      <Link href="/jobs" className="text-gray-800">
-       Find Jobs
+      <Link href="/categories/web-design" className="text-gray-800">
+       Categories
       </Link>
       
       <Link href="/blog" className="text-gray-800">

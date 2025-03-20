@@ -15,11 +15,11 @@ const categories = [
  { id: 'web-design', name: 'Web Design' },
 ]
 
-export default function CategoryNav() {
+export default function CategoryNav({ className }: { className?: string }) {
  const [activeCategory, setActiveCategory] = useState('discover')
 
  return (
-  <div className="py-6 px-4 mt-8 mb-6 overflow-x-auto">
+  <div className={`px-4 overflow-x-auto ${className}`}>
    <div className="flex max-w-7xl mx-auto items-center gap-4">
     {categories.map((category) => (
      <Link 
