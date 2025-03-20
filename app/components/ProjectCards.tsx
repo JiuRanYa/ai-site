@@ -116,24 +116,24 @@ export default function ProjectCards() {
 
     {/* 加载指示器 */}
     <div ref={loaderRef} className="mt-12 text-center">
-     {loading && (
+     {loading && hasMore && (
       <motion.div 
        initial={{ opacity: 0 }}
        animate={{ opacity: 1 }}
        className="py-4"
-          >
+        >
        <p className="text-gray-600 font-medium">Loading More...</p>
       </motion.div>
-        )}
+      )}
      {!hasMore && products.length > 0 && (
       <motion.div
        initial={{ opacity: 0, y: 10 }}
        animate={{ opacity: 1, y: 0 }}
        transition={{ duration: 0.5 }}
-          >
+        >
        <p className="text-gray-500">No more projects to load</p>
       </motion.div>
-        )}
+      )}
     </div>
    </div>
   )
