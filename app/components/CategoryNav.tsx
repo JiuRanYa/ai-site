@@ -14,7 +14,7 @@ const categories = [
 ]
 
 export default function CategoryNav({ className }: { className?: string }) {
- const [activeCategory, setActiveCategory] = useState('today')
+ const [activeCategory] = useState('today')
 
  return (
   <div className={`px-4 overflow-x-auto ${className}`}>
@@ -22,16 +22,12 @@ export default function CategoryNav({ className }: { className?: string }) {
     {categories.map((category) => (
      <Link 
       key={category.id}
-      href={`/category/${category.id}`}
+      href={`/category?category=${category.id}`}
       className={`px-5 py-3 rounded-full text-base transition-colors ${
        activeCategory === category.id 
         ? 'bg-gray-100 text-gray-800 font-medium' 
         : 'text-gray-700 hover:text-gray-900'
       }`}
-      onClick={(e) => {
-       e.preventDefault()
-       setActiveCategory(category.id)
-      }}
      >
       {category.name}
      </Link>
