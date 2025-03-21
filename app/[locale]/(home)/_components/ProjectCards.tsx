@@ -41,7 +41,7 @@ export default async function ProjectCards({
 
   return (
    <div className="max-w-7xl mx-auto px-4 pb-20">
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
      {products?.map((product: Product, index: number) => (
       <div
        key={`${product.id}-${index}`}
@@ -63,14 +63,14 @@ export default async function ProjectCards({
                     >
             {tag}
            </span>
-                  ))}
+          ))}
          </div>
         </div>
 
         <Link
          href={product.url}
          target="_blank"
-         className="block w-full text-center py-3 bg-black text-white rounded-full hover:bg-gray-800 transition-colors font-medium mt-4"
+         className="block text-center py-2 bg-black text-white rounded-full hover:bg-gray-800 transition-colors font-medium mt-4"
               >
          <span className="flex items-center justify-center gap-2">
           <svg 
