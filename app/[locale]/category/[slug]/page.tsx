@@ -1,5 +1,5 @@
-import CategoryNav from '@/components/CategoryNav'
-import ProjectCards from '@/components/ProjectCards'
+import CategoryNav from '@/core/components/CategoryNav'
+import ProjectCards from '@/core/components/ProjectCards'
 
 export default async function CategoryPage(
   props: {

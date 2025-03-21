@@ -1,9 +1,9 @@
 import '@/app/styles/globals.css'
 import { Inter } from 'next/font/google'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
+import Header from '@/core/components/Header'
+import Footer from '@/core/components/Footer'
 import { notFound } from 'next/navigation'
-import { routing } from '@/i18n/routing'
+import { routing } from '@/core/i18n/routing'
 import {NextIntlClientProvider, Locale, hasLocale} from 'next-intl'
 
 
