@@ -1,11 +1,10 @@
 import '@/app/styles/globals.css'
 import { Inter } from 'next/font/google'
-import Header from '@/core/components/Header'
-import Footer from '@/core/components/Footer'
+import Header from './_components/Header'
+import Footer from './_components/Footer'
 import { notFound } from 'next/navigation'
 import { routing } from '@/core/i18n/routing'
-import {NextIntlClientProvider, Locale, hasLocale} from 'next-intl'
-
+import {NextIntlClientProvider, hasLocale} from 'next-intl'
 
 const inter = Inter({ subsets: ['latin'] })
 

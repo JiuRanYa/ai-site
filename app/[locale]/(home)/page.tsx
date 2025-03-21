@@ -1,4 +1,4 @@
-import Hero from '@/core/components/Hero'
+import Hero from '@/app/[locale]/(home)/_components/Hero'
 
 export default function Home() {
  return (
