@@ -34,8 +34,8 @@ export default function Header() {
        {t('categories')}
       </Link>
       
-      <Link href="/blog" className="text-gray-800">
-       {t('blog')}
+      <Link href="/submit" className="text-gray-800">
+       {t('submit')}
       </Link>
      </nav>
     </div>
