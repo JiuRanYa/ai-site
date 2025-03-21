@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
 const categories = [
  { id: 'today', name: 'Today' },
@@ -9,12 +10,13 @@ const categories = [
  { id: 'new', name: 'New' },
  { id: 'free', name: 'Free' },
  { id: 'paid', name: 'Paid' },
- { id: 'web-design', name: 'Web Design' },
- { id: 'web-development', name: 'Web Development' },
+ { id: 'webDesign', name: 'Web Design' },
+ { id: 'webDevelopment', name: 'Web Development' },
 ]
 
 export default function CategoryNav({ className }: { className?: string }) {
  const [activeCategory] = useState('today')
+ const t = useTranslations('categories')
 
  return (
   <div className={`px-4 overflow-x-auto ${className}`}>
@@ -29,7 +31,7 @@ export default function CategoryNav({ className }: { className?: string }) {
         : 'text-gray-700 hover:text-gray-900'
       }`}
      >
-      {category.name}
+      {t(category.id)}
      </Link>
     ))}
    </div>
