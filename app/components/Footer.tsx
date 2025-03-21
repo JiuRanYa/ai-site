@@ -11,7 +11,7 @@ export default function Footer() {
        AI Source
       </Link>
       <p className="mt-4 text-gray-600 text-sm">
-       发现并分享世界上最优秀的AI工具和资源，助力设计师和开发者提升创作效率。
+       Find and share the best AI tools and resources in the world, helping designers and developers improve their creative efficiency.
       </p>
       <div className="mt-6 flex space-x-4">
        <a href="#" className="text-gray-500 hover:text-gray-800">
@@ -29,48 +29,48 @@ export default function Footer() {
 
      {/* 第二列 - 分类 */}
      <div>
-      <h3 className="font-semibold text-gray-900 mb-4">分类</h3>
+      <h3 className="font-semibold text-gray-900 mb-4">Categories</h3>
       <ul className="space-y-2">
-       <li><Link href="/category/design-tools" className="text-gray-600 hover:text-gray-900">设计工具</Link></li>
-       <li><Link href="/category/code-tools" className="text-gray-600 hover:text-gray-900">编程工具</Link></li>
-       <li><Link href="/category/productivity" className="text-gray-600 hover:text-gray-900">生产力工具</Link></li>
-       <li><Link href="/category/image-generation" className="text-gray-600 hover:text-gray-900">图像生成</Link></li>
-       <li><Link href="/category/text-generation" className="text-gray-600 hover:text-gray-900">文本生成</Link></li>
+       <li><Link href="/category/design-tools" className="text-gray-600 hover:text-gray-900">Design Tools</Link></li>
+       <li><Link href="/category/code-tools" className="text-gray-600 hover:text-gray-900">Code Tools</Link></li>
+       <li><Link href="/category/productivity" className="text-gray-600 hover:text-gray-900">Productivity Tools</Link></li>
+       <li><Link href="/category/image-generation" className="text-gray-600 hover:text-gray-900">Image Generation</Link></li>
+       <li><Link href="/category/text-generation" className="text-gray-600 hover:text-gray-900">Text Generation</Link></li>
       </ul>
      </div>
 
      {/* 第三列 - 资源 */}
      <div>
-      <h3 className="font-semibold text-gray-900 mb-4">资源</h3>
+      <h3 className="font-semibold text-gray-900 mb-4">Resources</h3>
       <ul className="space-y-2">
-       <li><Link href="/blog" className="text-gray-600 hover:text-gray-900">博客</Link></li>
-       <li><Link href="/guides" className="text-gray-600 hover:text-gray-900">使用指南</Link></li>
-       <li><Link href="/community" className="text-gray-600 hover:text-gray-900">社区</Link></li>
-       <li><Link href="/submit-tool" className="text-gray-600 hover:text-gray-900">提交工具</Link></li>
+       <li><Link href="/blog" className="text-gray-600 hover:text-gray-900">Blog</Link></li>
+       <li><Link href="/guides" className="text-gray-600 hover:text-gray-900">Guides</Link></li>
+       <li><Link href="/community" className="text-gray-600 hover:text-gray-900">Community</Link></li>
+       <li><Link href="/submit-tool" className="text-gray-600 hover:text-gray-900">Submit Tool</Link></li>
       </ul>
      </div>
 
      {/* 第四列 - 公司 */}
      <div>
-      <h3 className="font-semibold text-gray-900 mb-4">公司</h3>
+      <h3 className="font-semibold text-gray-900 mb-4">Company</h3>
       <ul className="space-y-2">
-       <li><Link href="/about" className="text-gray-600 hover:text-gray-900">关于我们</Link></li>
-       <li><Link href="/privacy" className="text-gray-600 hover:text-gray-900">隐私政策</Link></li>
-       <li><Link href="/terms" className="text-gray-600 hover:text-gray-900">使用条款</Link></li>
-       <li><Link href="/contact" className="text-gray-600 hover:text-gray-900">联系我们</Link></li>
+       <li><Link href="/about" className="text-gray-600 hover:text-gray-900">About Us</Link></li>
+       <li><Link href="/privacy" className="text-gray-600 hover:text-gray-900">Privacy Policy</Link></li>
+       <li><Link href="/terms" className="text-gray-600 hover:text-gray-900">Terms of Service</Link></li>
+       <li><Link href="/contact" className="text-gray-600 hover:text-gray-900">Contact Us</Link></li>
       </ul>
      </div>
     </div>
 
     <div className="mt-12 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center">
      <p className="text-gray-500 text-sm">
-      © {new Date().getFullYear()} AI Source. 保留所有权利。
+      © {new Date().getFullYear()} AI Source. All rights reserved.
      </p>
      <div className="mt-4 md:mt-0">
       <ul className="flex space-x-6">
-       <li><Link href="/privacy" className="text-gray-500 hover:text-gray-800 text-sm">隐私政策</Link></li>
-       <li><Link href="/terms" className="text-gray-500 hover:text-gray-800 text-sm">使用条款</Link></li>
-       <li><Link href="/cookies" className="text-gray-500 hover:text-gray-800 text-sm">Cookie 政策</Link></li>
+       <li><Link href="/privacy" className="text-gray-500 hover:text-gray-800 text-sm">Privacy Policy</Link></li>
+       <li><Link href="/terms" className="text-gray-500 hover:text-gray-800 text-sm">Terms of Service</Link></li>
+       <li><Link href="/cookies" className="text-gray-500 hover:text-gray-800 text-sm">Cookie Policy</Link></li>
       </ul>
      </div>
     </div>
