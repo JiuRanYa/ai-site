@@ -234,7 +234,8 @@ export default function SubmitPage() {
             value={formData.description}
             onChange={handleInputChange}
             placeholder={t('placeholders.description')}
-                />
+            className="h-24"
+           />
            {errors.description && <p className="mt-1 text-xs text-red-600">{errors.description}</p>}
           </div>
           <p className="mt-2 text-xs text-gray-500">{t('tips.description')}</p>
