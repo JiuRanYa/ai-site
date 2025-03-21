@@ -3,10 +3,10 @@
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import { Input } from '@/core/components/ui/input'
-import { Textarea } from '@/core/components/ui/textarea'
-import { Select, SelectValue, SelectTrigger, SelectItem, SelectContent } from '@/core/components/ui/select'
-import { Button } from '@/core/components/ui/button'
+import { Input } from '@/core/components/input'
+import { Textarea } from '@/core/components/textarea'
+import { Select, SelectValue, SelectTrigger, SelectItem, SelectContent } from '@/core/components/select'
+import { Button } from '@/core/components/button'
 
 export default function SubmitPage() {
   const t = useTranslations('SubmitForm')
