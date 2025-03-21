@@ -83,7 +83,7 @@ export default function Header() {
      
      <nav className="hidden md:flex items-center gap-8">
       <div className="relative group">
-       <HoverCard openDelay={0} closeDelay={0}>
+       <HoverCard openDelay={0} closeDelay={50}>
         <HoverCardTrigger asChild>
          <div className="flex items-center gap-1 text-gray-800 outline-none focus:outline-none cursor-pointer">
           {t('explore')}
@@ -163,7 +163,7 @@ export default function Header() {
       
       {/* Rankings 下拉菜单 */}
       <div className="relative group">
-       <HoverCard openDelay={0} closeDelay={0}>
+       <HoverCard openDelay={0} closeDelay={50}>
         <HoverCardTrigger asChild>
          <div className="flex items-center gap-1 text-gray-800 outline-none focus:outline-none cursor-pointer">
           {t('rankings.title')}
