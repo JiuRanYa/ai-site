@@ -1,19 +1,12 @@
-'use client'
-import { motion } from 'framer-motion'
-import Link from 'next/link'
 import CategoryNav from './CategoryNav'
 import ProjectCards from './ProjectCards'
 
 export default function Hero() {
  return (
   <div className='flex flex-col'>
-   {/* Hero 部分 */}
    <section className="flex-1 flex flex-col justify-center items-center pb-8">
     <div className="mx-auto px-4">
-     <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: 'easeOut' }}
+     <div 
       className="text-center mb-12 mt-24"
      >
       <h1 className="text-5xl md:text-7xl font-serif font-bold leading-tight mb-6">
@@ -23,12 +16,9 @@ export default function Hero() {
        Explore tools from the most talented and accomplished AI creators<br />
        ready to take on your next project
       </p>
-     </motion.div>
+     </div>
 
-     <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
+     <div 
       className="max-w-4xl mx-auto"
      >
       <div className="relative">
@@ -70,27 +60,21 @@ export default function Hero() {
         </div>
        </div>
       </div>
-     </motion.div>
+     </div>
      
      {/* 分类导航栏 */}
-     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.4, ease: 'easeOut' }}
+     <div
       className="w-full mt-8 mb-8"
      >
       <CategoryNav />
-     </motion.div>
+     </div>
      
      {/* 项目卡片展示 */}
-     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
+     <div
       className="w-full"
      >
       <ProjectCards />
-     </motion.div>
+     </div>
     </div>
    </section>
   </div>

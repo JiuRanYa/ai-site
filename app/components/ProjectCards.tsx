@@ -1,77 +1,21 @@
-'use client'
-
 import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { useState, useEffect, useRef } from 'react'
 
-// 定义产品类型
-type Product = {
-  id: string
-  title: string
-  url: string
-  preview?: string
-  tags?: string[]
+export const getProducts = async () => {
+ const res = await fetch('http://localhost:3001/api/products')
+ const data = await res.json()
+
+ return data.data.items
 }
 
-export default function ProjectCards() {
-  const [products, setProducts] = useState<Product[]>([])
-  const [page, setPage] = useState(1)
-  const [loading, setLoading] = useState(false)
-  const [hasMore, setHasMore] = useState(true)
-  const loaderRef = useRef<HTMLDivElement>(null)
-
-  const loadMoreProducts = async () => {
-    if (loading || !hasMore) return
-    
-    setLoading(true)
-    try {
-      const response = await fetch(`/api/products?page=${page}&pageSize=10`)
-      const data = await response.json()
-      
-      if (data.data.items.length > 0) {
-        setProducts(prev => [...prev, ...data.data.items])
-        setPage(prev => prev + 1)
-        setHasMore(data.data.pagination.hasMore)
-      } else {
-        setHasMore(false)
-      }
-    } catch (error) {
-      console.error('Failed to load products:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    loadMoreProducts()
-  }, []) // 初始加载
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !loading) {
-          loadMoreProducts()
-        }
-      },
-      { threshold: 0.1 }
-    )
-
-    if (loaderRef.current) {
-      observer.observe(loaderRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [loading, hasMore, page])
+export default async function ProjectCards() {
+  const products = await getProducts()
 
   return (
    <div className="max-w-7xl mx-auto px-4 pb-20">
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-     {products.map((product, index) => (
-      <motion.div
+     {products?.map((product, index) => (
+      <div
        key={`${product.id}-${index}`}
-       initial={{ opacity: 0, y: 20 }}
-       animate={{ opacity: 1, y: 0 }}
-       transition={{ duration: 0.5, delay: 0.1 }}
        className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow flex flex-col h-full"
           >
        <div className="aspect-[4/3] w-full bg-gray-100 relative">
@@ -126,30 +70,8 @@ export default function ProjectCards() {
          </span>
         </Link>
        </div>
-      </motion.div>
+      </div>
         ))}
-    </div>
-
-    {/* 加载指示器 */}
-    <div ref={loaderRef} className="mt-12 text-center">
-     {loading && hasMore && (
-      <motion.div 
-       initial={{ opacity: 0 }}
-       animate={{ opacity: 1 }}
-       className="py-4"
-        >
-       <p className="text-gray-600 font-medium">Loading More...</p>
-      </motion.div>
-      )}
-     {!hasMore && products.length > 0 && (
-      <motion.div
-       initial={{ opacity: 0, y: 10 }}
-       animate={{ opacity: 1, y: 0 }}
-       transition={{ duration: 0.5 }}
-        >
-       <p className="text-gray-500">No more projects to load</p>
-      </motion.div>
-      )}
     </div>
    </div>
   )
