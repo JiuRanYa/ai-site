@@ -1,0 +1,20 @@
+{
+  "nav": {
+    "home": "首页",
+    "categories": "分类"
+  },
+  "product": {
+    "preview": "预览",
+    "loadMore": "加载更多",
+    "noMore": "没有更多项目了"
+  },
+  "categories": {
+    "today": "今日",
+    "hot": "热门",
+    "new": "最新",
+    "free": "免费",
+    "paid": "付费",
+    "webDesign": "网页设计",
+    "webDevelopment": "网页开发"
+  }
+}

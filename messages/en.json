@@ -1,0 +1,20 @@
+{
+  "nav": {
+    "home": "Home",
+    "categories": "Categories"
+  },
+  "product": {
+    "preview": "Preview",
+    "loadMore": "Load More",
+    "noMore": "No more projects to load"
+  },
+  "categories": {
+    "today": "Today",
+    "hot": "Hot",
+    "new": "New",
+    "free": "Free",
+    "paid": "Paid",
+    "webDesign": "Web Design",
+    "webDevelopment": "Web Development"
+  }
+}
