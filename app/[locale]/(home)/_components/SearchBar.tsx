@@ -20,24 +20,24 @@ export default function SearchBar() {
     }
 
     try {
-      const response = await fetch('http://localhost:3001/api/completions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message: value }),
-      })
+      // const response = await fetch('http://localhost:3001/api/completions', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({ message: value }),
+      // })
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok')
-      }
+      // if (!response.ok) {
+      //   throw new Error('Network response was not ok')
+      // }
 
-      const data = await response.json()
-      if (data.message) {
-        setSuggestion(data.message)
-      } else {
-        setSuggestion('')
-      }
+      // const data = await response.json()
+      // if (data.message) {
+      //   setSuggestion(data.message)
+      // } else {
+      //   setSuggestion('')
+      // }
     } catch (error) {
       console.error('Error fetching suggestions:', error)
       setSuggestion('')
@@ -54,7 +54,7 @@ export default function SearchBar() {
   }, [debouncedInputValue])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // setInputValue(e.target.value)
+    setInputValue(e.target.value)
   }
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
