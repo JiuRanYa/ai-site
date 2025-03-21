@@ -22,7 +22,35 @@
     "categories": "Categories",
     "blog": "Blog",
     "submit": "Submit",
-    "goPro": "Go Pro"
+    "goPro": "Go Pro",
+    "newAIs": {
+     "title": "New AIs",
+     "description": "The Latest AIs, every day"
+   },
+   "mostSaved": {
+     "title": "Most Saved AIs",
+     "description": "AIs with the most favorites on Toolify"
+   },
+   "mostUsed": {
+     "title": "Most Used AIs",
+     "description": "AIs with the highest website traffic (monthly visits)"
+   },
+   "aiApps": {
+     "title": "AI Apps",
+     "description": "AI Tools by Apps"
+   },
+   "discordAI": {
+     "title": "Discord of AI",
+     "description": "Discover the Discord of AI"
+   },
+   "chromeExtensions": {
+     "title": "AI Chrome Extensions",
+     "description": "AI Tools by browser extensions"
+   },
+   "gpts": {
+     "title": "GPTs",
+     "description": "GPTs from GPT Store"
+   }
   },
   "Footer": {
     "description": "Find and share the best AI tools and resources in the world, helping designers and developers improve their creative efficiency.",

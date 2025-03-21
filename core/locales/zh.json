@@ -22,7 +22,35 @@
     "categories": "分类",
     "blog": "博客",
     "submit": "提交",
-    "goPro": "升级专业版"
+    "goPro": "升级专业版",
+    "newAIs": {
+     "title": "新AI工具",
+     "description": "每日更新的最新AI工具"
+   },
+   "mostSaved": {
+     "title": "最多收藏AI",
+     "description": "在Toolify上最受欢迎的AI工具"
+   },
+   "mostUsed": {
+     "title": "使用最多AI",
+     "description": "访问量最高的AI工具（月访问量）"
+   },
+   "aiApps": {
+     "title": "AI应用",
+     "description": "应用程序形式的AI工具"
+   },
+   "discordAI": {
+     "title": "AI Discord社区",
+     "description": "探索AI相关的Discord社区"
+   },
+   "chromeExtensions": {
+     "title": "AI浏览器扩展",
+     "description": "浏览器扩展形式的AI工具"
+   },
+   "gpts": {
+     "title": "GPTs模型",
+     "description": "来自GPT商店的GPT模型"
+   }
   },
   "Footer": {
     "description": "发现和分享世界上最好的AI工具和资源，帮助设计师和开发者提高创作效率。",
