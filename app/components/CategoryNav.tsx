@@ -24,7 +24,7 @@ export default function CategoryNav({ className }: { className?: string }) {
     {categories.map((category) => (
      <Link 
       key={category.id}
-      href={`/category?category=${category.id}`}
+      href={`/category/${category.id}`}
       className={`px-5 py-3 rounded-full text-base transition-colors ${
        activeCategory === category.id 
         ? 'bg-gray-100 text-gray-800 font-medium' 
