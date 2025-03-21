@@ -51,7 +51,7 @@ export default function Header() {
 
      <button 
       onClick={toggleLocale}
-      className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-gray-100 hover:bg-gray-200 text-sm font-medium text-gray-800"
+      className="flex items-center cursor-pointer gap-1 px-3 py-1.5 rounded-full bg-gray-100 hover:bg-gray-200 text-sm font-medium text-gray-800"
      >
       {locale === 'en' ? '中文' : 'EN'}
       <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
