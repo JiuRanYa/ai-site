@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { useLocale } from 'next-intl'
 import { useRouter } from 'next/navigation'
+import { DropdownMenu, DropdownMenuSeparator, DropdownMenuLabel, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuItem } from '@/core/components/dropdown-menu'
 
 export default function Header() {
  const t = useTranslations('Header')
@@ -24,10 +25,21 @@ export default function Header() {
      
      <nav className="hidden md:flex items-center gap-8">
       <div className="relative group">
-       <button className="flex items-center gap-1 text-gray-800">
-        {t('explore')}
-        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
-       </button>
+       <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+         <div className="flex items-center gap-1 text-gray-800 outline-none focus:outline-none">
+          {t('explore')}
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+         </div>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+         <div className="flex flex-col gap-2">
+          <Link href="/categories/web-design" className="text-gray-800">
+           {t('categories')}
+          </Link>
+         </div>
+        </DropdownMenuContent>
+       </DropdownMenu>
       </div>
       
       <Link href="/categories/web-design" className="text-gray-800">
