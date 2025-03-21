@@ -3,8 +3,7 @@ import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { useLocale } from 'next-intl'
 import { useRouter } from 'next/navigation'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/core/components/dropdown-menu'
-
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/core/components/hover-card'
 export default function Header() {
  const t = useTranslations('Header')
  const locale = useLocale()
@@ -25,14 +24,14 @@ export default function Header() {
      
      <nav className="hidden md:flex items-center gap-8">
       <div className="relative group">
-       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
+       <HoverCard openDelay={0}>
+        <HoverCardTrigger asChild>
          <div className="flex items-center gap-1 text-gray-800 outline-none focus:outline-none cursor-pointer">
           {t('explore')}
           <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
          </div>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-[800px] p-0" side="bottom" align="start">
+        </HoverCardTrigger>
+        <HoverCardContent asChild className="w-[800px] rounded-lg p-0" side="bottom" align="start">
          <div className="grid grid-cols-2 gap-4 p-4">
           {/* 新AI */}
           <Link href="/new-ais" className="flex items-start p-3 rounded-lg hover:bg-gray-50">
@@ -126,8 +125,8 @@ export default function Header() {
            </div>
           </Link>
          </div>
-        </DropdownMenuContent>
-       </DropdownMenu>
+        </HoverCardContent>
+       </HoverCard>
       </div>
       
       <Link href="/categories/web-design" className="text-gray-800">
