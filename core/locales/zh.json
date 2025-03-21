@@ -50,6 +50,29 @@
    "gpts": {
      "title": "GPTs模型",
      "description": "来自GPT商店的GPT模型"
+   },
+   "rankings": {
+     "title": "排行榜",
+     "monthly": {
+       "title": "月度AI排行榜",
+       "description": "按月统计的AI工具访问量排行"
+     },
+     "categories": {
+       "title": "分类AI排行榜",
+       "description": "按类别统计的AI工具访问量排行"
+     },
+     "regions": {
+       "title": "地区AI排行榜",
+       "description": "按地区统计的AI工具访问量排行"
+     },
+     "source": {
+       "title": "来源AI排行榜",
+       "description": "按来源统计的AI工具访问量排行"
+     },
+     "revenue": {
+       "title": "营收AI排行榜",
+       "description": "按营收和实际流量统计的AI工具排行"
+     }
    }
   },
   "Footer": {

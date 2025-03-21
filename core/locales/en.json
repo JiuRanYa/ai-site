@@ -50,6 +50,29 @@
    "gpts": {
      "title": "GPTs",
      "description": "GPTs from GPT Store"
+   },
+   "rankings": {
+     "title": "Rankings",
+     "monthly": {
+       "title": "Top AI By Monthly",
+       "description": "Top AI lists by month and monthly visits."
+     },
+     "categories": {
+       "title": "Top AI By Categories",
+       "description": "Top AI lists by category and monthly visits."
+     },
+     "regions": {
+       "title": "Top AI By Regions",
+       "description": "Top AI lists by region and monthly visits."
+     },
+     "source": {
+       "title": "Top AI By Source",
+       "description": "Top AI lists by source and monthly visits."
+     },
+     "revenue": {
+       "title": "Top AI by Revenue",
+       "description": "Top AI lists by revenue and real traffic."
+     }
    }
   },
   "Footer": {
