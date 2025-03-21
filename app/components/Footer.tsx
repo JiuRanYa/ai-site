@@ -1,6 +1,9 @@
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
 export default function Footer() {
+ const t = useTranslations('Footer')
+ 
  return (
   <footer className="border-t border-gray-200 bg-white">
    <div className="max-w-7xl mx-auto px-6 py-12">
@@ -11,7 +14,7 @@ export default function Footer() {
        AI Source
       </Link>
       <p className="mt-4 text-gray-600 text-sm">
-       Find and share the best AI tools and resources in the world, helping designers and developers improve their creative efficiency.
+       {t('description')}
       </p>
       <div className="mt-6 flex space-x-4">
        <a href="#" className="text-gray-500 hover:text-gray-800">
@@ -29,42 +32,42 @@ export default function Footer() {
 
      {/* 第二列 - 分类 */}
      <div>
-      <h3 className="font-semibold text-gray-900 mb-4">Categories</h3>
+      <h3 className="font-semibold text-gray-900 mb-4">{t('categories.title')}</h3>
       <ul className="space-y-2">
-       <li><Link href="/category/design-tools" className="text-gray-600 hover:text-gray-900">Design Tools</Link></li>
-       <li><Link href="/category/code-tools" className="text-gray-600 hover:text-gray-900">Code Tools</Link></li>
-       <li><Link href="/category/productivity" className="text-gray-600 hover:text-gray-900">Productivity Tools</Link></li>
-       <li><Link href="/category/image-generation" className="text-gray-600 hover:text-gray-900">Image Generation</Link></li>
-       <li><Link href="/category/text-generation" className="text-gray-600 hover:text-gray-900">Text Generation</Link></li>
+       <li><Link href="/category/design-tools" className="text-gray-600 hover:text-gray-900">{t('categories.designTools')}</Link></li>
+       <li><Link href="/category/code-tools" className="text-gray-600 hover:text-gray-900">{t('categories.codeTools')}</Link></li>
+       <li><Link href="/category/productivity" className="text-gray-600 hover:text-gray-900">{t('categories.productivityTools')}</Link></li>
+       <li><Link href="/category/image-generation" className="text-gray-600 hover:text-gray-900">{t('categories.imageGeneration')}</Link></li>
+       <li><Link href="/category/text-generation" className="text-gray-600 hover:text-gray-900">{t('categories.textGeneration')}</Link></li>
       </ul>
      </div>
 
      {/* 第三列 - 资源 */}
      <div>
-      <h3 className="font-semibold text-gray-900 mb-4">Resources</h3>
+      <h3 className="font-semibold text-gray-900 mb-4">{t('resources.title')}</h3>
       <ul className="space-y-2">
-       <li><Link href="/blog" className="text-gray-600 hover:text-gray-900">Blog</Link></li>
-       <li><Link href="/guides" className="text-gray-600 hover:text-gray-900">Guides</Link></li>
-       <li><Link href="/community" className="text-gray-600 hover:text-gray-900">Community</Link></li>
-       <li><Link href="/submit-tool" className="text-gray-600 hover:text-gray-900">Submit Tool</Link></li>
+       <li><Link href="/blog" className="text-gray-600 hover:text-gray-900">{t('resources.blog')}</Link></li>
+       <li><Link href="/guides" className="text-gray-600 hover:text-gray-900">{t('resources.guides')}</Link></li>
+       <li><Link href="/community" className="text-gray-600 hover:text-gray-900">{t('resources.community')}</Link></li>
+       <li><Link href="/submit-tool" className="text-gray-600 hover:text-gray-900">{t('resources.submitTool')}</Link></li>
       </ul>
      </div>
 
      {/* 第四列 - 公司 */}
      <div>
-      <h3 className="font-semibold text-gray-900 mb-4">Company</h3>
+      <h3 className="font-semibold text-gray-900 mb-4">{t('company.title')}</h3>
       <ul className="space-y-2">
-       <li><Link href="/about" className="text-gray-600 hover:text-gray-900">About Us</Link></li>
-       <li><Link href="/privacy" className="text-gray-600 hover:text-gray-900">Privacy Policy</Link></li>
-       <li><Link href="/terms" className="text-gray-600 hover:text-gray-900">Terms of Service</Link></li>
-       <li><Link href="/contact" className="text-gray-600 hover:text-gray-900">Contact Us</Link></li>
+       <li><Link href="/about" className="text-gray-600 hover:text-gray-900">{t('company.about')}</Link></li>
+       <li><Link href="/privacy" className="text-gray-600 hover:text-gray-900">{t('company.privacy')}</Link></li>
+       <li><Link href="/terms" className="text-gray-600 hover:text-gray-900">{t('company.terms')}</Link></li>
+       <li><Link href="/contact" className="text-gray-600 hover:text-gray-900">{t('company.contact')}</Link></li>
       </ul>
      </div>
     </div>
 
     <div className="mt-12 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center">
      <p className="text-gray-500 text-sm">
-      © {new Date().getFullYear()} AI Source. All rights reserved.
+      © {new Date().getFullYear()} {t('copyright')}
      </p>
      <div className="mt-4 md:mt-0">
       <ul className="flex space-x-6">

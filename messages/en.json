@@ -16,5 +16,50 @@
     "paid": "Paid",
     "webDesign": "Web Design",
     "webDevelopment": "Web Development"
+  },
+  "Header": {
+    "explore": "Explore",
+    "categories": "Categories",
+    "blog": "Blog",
+    "goPro": "Go Pro"
+  },
+  "Footer": {
+    "description": "Find and share the best AI tools and resources in the world, helping designers and developers improve their creative efficiency.",
+    "categories": {
+      "title": "Categories",
+      "designTools": "Design Tools",
+      "codeTools": "Code Tools",
+      "productivityTools": "Productivity Tools",
+      "imageGeneration": "Image Generation",
+      "textGeneration": "Text Generation"
+    },
+    "resources": {
+      "title": "Resources",
+      "blog": "Blog",
+      "guides": "Guides",
+      "community": "Community",
+      "submitTool": "Submit Tool"
+    },
+    "company": {
+      "title": "Company",
+      "about": "About Us",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "contact": "Contact Us"
+    },
+    "copyright": "AI Source. All rights reserved."
+  },
+  "Hero": {
+    "title": "Discover the world's",
+    "titleSecondLine": "top AI tools",
+    "subtitle": "Explore tools from the most talented and accomplished AI creators",
+    "subtitleSecondLine": "ready to take on your next project",
+    "searchPlaceholder": "What are you looking for?",
+    "filterOptions": {
+      "shots": "Shots",
+      "tools": "Tools",
+      "resources": "Resources"
+    },
+    "trendingSearches": "Trending searches"
   }
 }

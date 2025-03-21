@@ -16,5 +16,50 @@
     "paid": "付费",
     "webDesign": "网页设计",
     "webDevelopment": "网页开发"
+  },
+  "Header": {
+    "explore": "探索",
+    "categories": "分类",
+    "blog": "博客",
+    "goPro": "升级专业版"
+  },
+  "Footer": {
+    "description": "发现和分享世界上最好的AI工具和资源，帮助设计师和开发者提高创作效率。",
+    "categories": {
+      "title": "分类",
+      "designTools": "设计工具",
+      "codeTools": "编程工具",
+      "productivityTools": "生产力工具",
+      "imageGeneration": "图像生成",
+      "textGeneration": "文本生成"
+    },
+    "resources": {
+      "title": "资源",
+      "blog": "博客",
+      "guides": "指南",
+      "community": "社区",
+      "submitTool": "提交工具"
+    },
+    "company": {
+      "title": "公司",
+      "about": "关于我们",
+      "privacy": "隐私政策",
+      "terms": "服务条款",
+      "contact": "联系我们"
+    },
+    "copyright": "AI Source. 保留所有权利。"
+  },
+  "Hero": {
+    "title": "发现世界上",
+    "titleSecondLine": "最好的AI工具",
+    "subtitle": "探索来自最有才华和经验的AI创作者的工具",
+    "subtitleSecondLine": "准备好接受你的下一个项目",
+    "searchPlaceholder": "你在寻找什么？",
+    "filterOptions": {
+      "shots": "作品",
+      "tools": "工具",
+      "resources": "资源"
+    },
+    "trendingSearches": "热门搜索"
   }
 }
