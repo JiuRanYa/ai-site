@@ -1,4 +1,6 @@
+'use client'
 import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
 
 // 定义产品类型
 type Product = {
@@ -19,25 +21,73 @@ type ProductsResponse = {
   }
 }
 
-export const getProducts = async (category?: string) => {
-  // 构建 URL，如果有 category 参数则添加到查询字符串中
+export const getProducts = async (category?: string, page: number = 1) => {
   const baseUrl = 'http://localhost:3001/api/products'
-  const url = category 
-    ? `${baseUrl}?category=${encodeURIComponent(category)}` 
-    : baseUrl
+  const url = new URL(baseUrl)
+  
+  if (category) {
+    url.searchParams.set('category', category)
+  }
+  url.searchParams.set('page', page.toString())
 
   const res = await fetch(url)
   const data = await res.json() as ProductsResponse
 
-  return data.data.items
+  return data.data
 }
 
-export default async function ProjectCards({
+export default function ProjectCards({
   category
 }: {
   category?: string
 }) {
-  const products = await getProducts(category)
+  const [products, setProducts] = useState<Product[]>([])
+  const [page, setPage] = useState(1)
+  const [loading, setLoading] = useState(false)
+  const [hasMore, setHasMore] = useState(true)
+  const observerTarget = useRef<HTMLDivElement>(null)
+
+  const loadMore = async () => {
+    if (loading || !hasMore) return
+    
+    setLoading(true)
+    try {
+      const result = await getProducts(category, page)
+      setProducts(prev => [...prev, ...result.items])
+      setHasMore(result.pagination.hasMore)
+      setPage(prev => prev + 1)
+    } catch (error) {
+      console.error('Failed to load more products:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    // 首次加载数据
+    loadMore()
+  }, [category])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        if (entries[0].isIntersecting) {
+          loadMore()
+        }
+      },
+      { threshold: 0.1 }
+    )
+
+    if (observerTarget.current) {
+      observer.observe(observerTarget.current)
+    }
+
+    return () => {
+      if (observerTarget.current) {
+        observer.unobserve(observerTarget.current)
+      }
+    }
+  }, [hasMore, loading])
 
   return (
    <div className="max-w-7xl mx-auto px-4 pb-20">
@@ -99,6 +149,12 @@ export default async function ProjectCards({
        </div>
       </div>
         ))}
+    </div>
+    
+    {/* 加载指示器和观察目标 */}
+    <div ref={observerTarget} className="w-full py-8 flex justify-center">
+     {loading && <div className="text-gray-500">加载中...</div>}
+     {!hasMore && <div className="text-gray-500">没有更多数据了</div>}
     </div>
    </div>
   )
