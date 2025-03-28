@@ -45,12 +45,15 @@ export default function ProjectCards({
   const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(false)
   const [hasMore, setHasMore] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const observerTarget = useRef<HTMLDivElement>(null)
 
   const loadMore = async () => {
-    if (loading || !hasMore) return
+    if (loading || !hasMore || error) return
     
     setLoading(true)
+    setError(null)
+    
     try {
       const result = await getProducts(category, page)
       setProducts(prev => [...prev, ...result.items])
@@ -58,6 +61,8 @@ export default function ProjectCards({
       setPage(prev => prev + 1)
     } catch (error) {
       console.error('Failed to load more products:', error)
+      setError('加载失败，请稍后重试')
+      // 保持 hasMore 为 true，这样用户可以重试
     } finally {
       setLoading(false)
     }
@@ -151,10 +156,28 @@ export default function ProjectCards({
         ))}
     </div>
     
-    {/* 加载指示器和观察目标 */}
-    <div ref={observerTarget} className="w-full py-8 flex justify-center">
-     {loading && <div className="text-gray-500">加载中...</div>}
-     {!hasMore && <div className="text-gray-500">没有更多数据了</div>}
+    {/* 固定高度的加载状态容器 */}
+    <div 
+     ref={observerTarget} 
+     className="w-full h-20 flex justify-center items-center"
+    >
+     {loading && (
+      <div className="text-gray-500">加载中...</div>
+      )}
+     {error && (
+      <div className="flex flex-col items-center gap-2">
+       <div className="text-red-500">{error}</div>
+       <button 
+        onClick={() => loadMore()}
+        className="px-4 py-2 text-sm text-white bg-black rounded-full hover:bg-gray-800"
+          >
+        重试
+       </button>
+      </div>
+      )}
+     {!loading && !error && !hasMore && (
+      <div className="text-gray-500">没有更多数据了</div>
+      )}
     </div>
    </div>
   )
