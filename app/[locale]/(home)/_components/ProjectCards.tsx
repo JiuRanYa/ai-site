@@ -40,7 +40,7 @@ export const getProducts = async (category?: string, page: number = 1) => {
 
 // 添加 LoadingSpinner 组件
 const LoadingSpinner = () => (
- <div className="flex items-center gap-3 mt-8">
+ <div className="flex items-center gap-3 my-8">
   <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-gray-900"></div>
   <span className="text-gray-600">Loading more...</span>
  </div>
@@ -202,7 +202,7 @@ export default function ProjectCards({
     
     <div 
      ref={observerTarget} 
-     className="w-full h-20 flex justify-center items-center"
+     className="w-full h-40 flex justify-center items-center"
     >
      {loading && <LoadingSpinner />}
      {error && (
@@ -254,7 +254,7 @@ export default function ProjectCards({
         fill="none" 
         viewBox="0 0 24 24" 
         stroke="currentColor"
-        >
+      >
         <path 
          strokeLinecap="round" 
          strokeLinejoin="round" 
