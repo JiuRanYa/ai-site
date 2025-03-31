@@ -10,6 +10,13 @@ const nextConfig: NextConfig = {
         destination: 'http://localhost:3001/api/:path*'
       }
     ]
+  },
+  images: {
+    remotePatterns: [
+      {
+        hostname: 'sgltrnagsnfqiependff.supabase.co'
+      }
+    ]
   }
 }
  

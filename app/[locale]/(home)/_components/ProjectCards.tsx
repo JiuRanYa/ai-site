@@ -106,7 +106,7 @@ export default function ProjectCards({
        <div className="aspect-[4/3] w-full bg-gray-100 relative">
         {product.image ? (
          <Image
-          src={`data:image/jpeg;base64,${product.image}`}
+          src={product.image}
           alt={product.title}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
