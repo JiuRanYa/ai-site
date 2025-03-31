@@ -56,7 +56,14 @@ export default function ProjectCards({
   const [loading, setLoading] = useState(false)
   const [hasMore, setHasMore] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [loadCount, setLoadCount] = useState(0)
+  const [autoLoad, setAutoLoad] = useState(true)
   const observerTarget = useRef<HTMLDivElement>(null)
+
+  const resetAutoLoad = () => {
+    setLoadCount(0)
+    setAutoLoad(true)
+  }
 
   const loadMore = async () => {
     if (loading || !hasMore || error) return
@@ -69,21 +76,41 @@ export default function ProjectCards({
       setProducts(prev => [...prev, ...result.items])
       setHasMore(result.pagination.hasMore)
       setPage(prev => prev + 1)
+      
+      // 如果是手动加载模式，点击后重置计数和自动加载
+      if (!autoLoad) {
+        resetAutoLoad()
+      } else {
+        // 自动加载模式下，增加计数
+        setLoadCount(prev => {
+          const newCount = prev + 1
+          // 当达到3次时，停止自动加载
+          if (newCount >= 3) {
+            setAutoLoad(false)
+          }
+          return newCount
+        })
+      }
     } catch (error) {
       console.error('Failed to load more products:', error)
       setError('加载失败，请稍后重试')
-      // 保持 hasMore 为 true，这样用户可以重试
     } finally {
       setLoading(false)
     }
   }
 
   useEffect(() => {
-    // 首次加载数据
+    // 切换分类时重置所有状态
+    setProducts([])
+    setPage(1)
+    resetAutoLoad()
+    setHasMore(true)
     loadMore()
   }, [category])
 
   useEffect(() => {
+    if (!autoLoad) return
+
     const observer = new IntersectionObserver(
       entries => {
         if (entries[0].isIntersecting) {
@@ -102,7 +129,7 @@ export default function ProjectCards({
         observer.unobserve(observerTarget.current)
       }
     }
-  }, [hasMore, loading])
+  }, [hasMore, loading, autoLoad])
 
   return (
    <div className="max-w-7xl mx-auto px-4">
@@ -173,7 +200,6 @@ export default function ProjectCards({
         ))}
     </div>
     
-    {/* 加载状态容器 */}
     <div 
      ref={observerTarget} 
      className="w-full h-20 flex justify-center items-center"
@@ -218,24 +244,45 @@ export default function ProjectCards({
        </button>
       </div>
       )}
-     {!loading && !error && !hasMore && (
-      <div className="text-gray-500 flex items-center gap-2">
+     {!loading && !error && hasMore && !autoLoad && (
+      <button 
+       onClick={loadMore}
+       className="px-6 py-2 text-sm text-white bg-black rounded-full hover:bg-gray-800 transition-colors flex items-center gap-2"
+      >
        <svg 
-        className="w-5 h-5" 
+        className="w-4 h-4" 
         fill="none" 
         viewBox="0 0 24 24" 
         stroke="currentColor"
-          >
+        >
         <path 
          strokeLinecap="round" 
          strokeLinejoin="round" 
          strokeWidth={2} 
-         d="M5 13l4 4L19 7" 
-            />
+         d="M19 9l-7 7-7-7" 
+          />
        </svg>
-       <span>已经到底啦</span>
-      </div>
-      )}
+       加载更多
+      </button>
+    )}
+     {!loading && !error && !hasMore && (
+     <div className="text-gray-500 flex items-center gap-2">
+      <svg 
+       className="w-5 h-5" 
+       fill="none" 
+       viewBox="0 0 24 24" 
+       stroke="currentColor"
+        >
+       <path 
+        strokeLinecap="round" 
+        strokeLinejoin="round" 
+        strokeWidth={2} 
+        d="M5 13l4 4L19 7" 
+          />
+      </svg>
+      <span>已经到底啦</span>
+     </div>
+    )}
     </div>
    </div>
   )
