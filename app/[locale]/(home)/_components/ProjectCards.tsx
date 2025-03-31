@@ -9,6 +9,7 @@ type Product = {
   url: string
   preview?: string
   image?: string
+  description?: string
   tags?: string[]
 }
 
@@ -134,50 +135,31 @@ export default function ProjectCards({
 
        <div className="p-6 flex-1 flex flex-col">
         <div className="flex-1">
-         <h3 className="text-lg font-medium text-gray-900 mb-3">
-          {product.title}
-         </h3>
-         <div className="flex flex-wrap gap-2 mb-4">
+         <Link
+          href={product.url}
+          target="_blank"
+          className="block group"
+         >
+          <h3 className="text-lg font-medium text-gray-900 mb-2 group-hover:text-gray-600 transition-colors">
+           {product.title}
+          </h3>
+          {product.description && (
+           <p className="text-sm text-gray-500 mb-3 line-clamp-2">
+            {product.description}
+           </p>
+          )}
+         </Link>
+         <div className="flex flex-wrap gap-2">
           {product.tags?.map((tag: string) => (
            <span
             key={tag}
             className="px-3 py-1 bg-gray-100 text-gray-600 text-xs rounded-full"
-                    >
+           >
             {tag}
            </span>
           ))}
          </div>
         </div>
-
-        <Link
-         href={product.url}
-         target="_blank"
-         className="block text-center py-2 bg-black text-white rounded-full hover:bg-gray-800 transition-colors font-medium mt-4"
-              >
-         <span className="flex items-center justify-center gap-2">
-          <svg 
-           width="20" 
-           height="20" 
-           fill="none" 
-           viewBox="0 0 24 24" 
-           stroke="currentColor"
-                  >
-           <path 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-            strokeWidth="2" 
-            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" 
-                    />
-           <path 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-            strokeWidth="2" 
-            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" 
-                    />
-          </svg>
-          Preview
-         </span>
-        </Link>
        </div>
       </div>
         ))}

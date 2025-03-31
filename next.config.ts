@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
         hostname: 'sgltrnagsnfqiependff.supabase.co'
       }
     ]
-  }
+  },
 }
  
 const withNextIntl = createNextIntlPlugin('./core/i18n/request.ts')
