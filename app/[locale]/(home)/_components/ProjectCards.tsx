@@ -42,7 +42,7 @@ export const getProducts = async (category?: string, page: number = 1) => {
 const LoadingSpinner = () => (
  <div className="flex items-center gap-3 mt-8">
   <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-gray-900"></div>
-  <span className="text-gray-600">加载中...</span>
+  <span className="text-gray-600">Loading more...</span>
  </div>
 )
 
