@@ -38,6 +38,14 @@ export const getProducts = async (category?: string, page: number = 1) => {
   return data.data
 }
 
+// 添加 LoadingSpinner 组件
+const LoadingSpinner = () => (
+ <div className="flex items-center gap-3 mt-8">
+  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-gray-900"></div>
+  <span className="text-gray-600">加载中...</span>
+ </div>
+)
+
 export default function ProjectCards({
   category
 }: {
@@ -97,7 +105,7 @@ export default function ProjectCards({
   }, [hasMore, loading])
 
   return (
-   <div className="max-w-7xl mx-auto px-4 pb-20">
+   <div className="max-w-7xl mx-auto px-4">
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
      {products?.map((product: Product, index: number) => (
       <div
@@ -165,27 +173,68 @@ export default function ProjectCards({
         ))}
     </div>
     
-    {/* 固定高度的加载状态容器 */}
+    {/* 加载状态容器 */}
     <div 
      ref={observerTarget} 
      className="w-full h-20 flex justify-center items-center"
     >
-     {loading && (
-      <div className="text-gray-500">加载中...</div>
-      )}
+     {loading && <LoadingSpinner />}
      {error && (
       <div className="flex flex-col items-center gap-2">
-       <div className="text-red-500">{error}</div>
+       <div className="text-red-500 flex items-center gap-2">
+        <svg 
+         className="w-5 h-5" 
+         fill="none" 
+         viewBox="0 0 24 24" 
+         stroke="currentColor"
+            >
+         <path 
+          strokeLinecap="round" 
+          strokeLinejoin="round" 
+          strokeWidth={2} 
+          d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" 
+              />
+        </svg>
+        <span>{error}</span>
+       </div>
        <button 
         onClick={() => loadMore()}
-        className="px-4 py-2 text-sm text-white bg-black rounded-full hover:bg-gray-800"
+        className="px-4 py-2 text-sm text-white bg-black rounded-full hover:bg-gray-800 transition-colors flex items-center gap-2"
           >
+        <svg 
+         className="w-4 h-4" 
+         fill="none" 
+         viewBox="0 0 24 24" 
+         stroke="currentColor"
+            >
+         <path 
+          strokeLinecap="round" 
+          strokeLinejoin="round" 
+          strokeWidth={2} 
+          d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" 
+              />
+        </svg>
         重试
        </button>
       </div>
       )}
      {!loading && !error && !hasMore && (
-      <div className="text-gray-500">没有更多数据了</div>
+      <div className="text-gray-500 flex items-center gap-2">
+       <svg 
+        className="w-5 h-5" 
+        fill="none" 
+        viewBox="0 0 24 24" 
+        stroke="currentColor"
+          >
+        <path 
+         strokeLinecap="round" 
+         strokeLinejoin="round" 
+         strokeWidth={2} 
+         d="M5 13l4 4L19 7" 
+            />
+       </svg>
+       <span>已经到底啦</span>
+      </div>
       )}
     </div>
    </div>
