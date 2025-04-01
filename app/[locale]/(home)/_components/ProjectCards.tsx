@@ -24,7 +24,7 @@ type ProductsResponse = {
 }
 
 export const getProducts = async (category?: string, page: number = 1, query?: string) => {
-  const baseUrl = 'http://localhost:3001/api/products/search'
+  const baseUrl = 'http://localhost:3001/api/products'
   const url = new URL(baseUrl)
   
   if (category) {
