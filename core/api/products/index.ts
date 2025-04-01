@@ -21,7 +21,7 @@ type ProductsResponse = {
 
 export const fetchProducts = async ({ pageParam = 1, queryKey }: any) => {
   const [, query] = queryKey
-  const baseUrl = 'http://localhost:3001/api/products'
+  const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/products`
   const url = new URL(baseUrl)
   
   if (query) {
