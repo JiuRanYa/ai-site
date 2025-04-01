@@ -6,6 +6,7 @@ import { useInfiniteQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { fetchProducts } from '@/core/api/products'
+import { Product } from '@/core/api/products'
 
 // 添加 LoadingSpinner 组件
 const LoadingSpinner = () => (

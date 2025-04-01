@@ -1,5 +1,5 @@
 // 定义产品类型
-type Product = {
+export type Product = {
   id: string
   title: string
   url: string
