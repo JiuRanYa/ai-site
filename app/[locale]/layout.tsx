@@ -5,6 +5,7 @@ import Footer from './(home)/_components/Footer'
 import { notFound } from 'next/navigation'
 import { routing } from '@/core/i18n/routing'
 import {NextIntlClientProvider, hasLocale} from 'next-intl'
+import Providers from './providers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,17 +28,19 @@ export default async function RootLayout({
    }
 
  return (
-  <html lang="zh-CN">
+  <html lang={locale}>
    <body className={inter.className}>
-    <NextIntlClientProvider>
-     <div className="flex flex-col min-h-screen">
-      <Header />
-      <main className="flex-grow">
-       {children}
-      </main>
-      <Footer />
-     </div>
-    </NextIntlClientProvider>
+    <Providers>
+     <NextIntlClientProvider>
+      <div className="flex flex-col min-h-screen">
+       <Header />
+       <main className="flex-grow">
+        {children}
+       </main>
+       <Footer />
+      </div>
+     </NextIntlClientProvider>
+    </Providers>
    </body>
   </html>
  )
