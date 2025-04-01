@@ -5,42 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-// 定义产品类型
-type Product = {
-  id: string
-  title: string
-  url: string
-  preview?: string
-  image?: string
-  description?: string
-  tags?: string[]
-}
-
-type ProductsResponse = {
-  data: {
-    items: Product[]
-    pagination: {
-      hasMore: boolean
-      total: number
-    }
-  }
-}
-
-const fetchProducts = async ({ pageParam = 1, queryKey }: any) => {
-  const [_, query] = queryKey
-  const baseUrl = 'http://localhost:3001/api/products'
-  const url = new URL(baseUrl)
-  
-  if (query) {
-    url.searchParams.set('q', query)
-  }
-  url.searchParams.set('page', pageParam.toString())
-  url.searchParams.set('pageSize', '12')
-
-  const res = await fetch(url)
-  const data = await res.json() as ProductsResponse
-  return data.data
-}
+import { fetchProducts } from '@/core/api/products'
 
 // 添加 LoadingSpinner 组件
 const LoadingSpinner = () => (
@@ -56,7 +21,7 @@ export default function ProjectCards() {
   const query = searchParams.get('q')
   
   const [autoLoad, setAutoLoad] = useState(true)
-  const [loadCount, setLoadCount] = useState(0)
+  const [, setLoadCount] = useState(0)
   const observerTarget = useRef<HTMLDivElement>(null)
 
   const {
