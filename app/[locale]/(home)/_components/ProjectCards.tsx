@@ -32,7 +32,7 @@ export const getProducts = async (page: number = 1, query?: string) => {
     url.searchParams.set('q', query)
   }
   url.searchParams.set('page', page.toString())
-  url.searchParams.set('pageSize', '10')
+  url.searchParams.set('pageSize', '12')
 
   const res = await fetch(url)
   const data = await res.json() as ProductsResponse
