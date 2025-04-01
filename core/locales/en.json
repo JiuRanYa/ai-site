@@ -6,7 +6,8 @@
   "product": {
     "preview": "Preview",
     "loadMore": "Load More",
-    "noMore": "No more projects to load"
+    "noMore": "No more projects to load",
+    "retry": "Retry"
   },
   "categories": {
     "today": "Today",

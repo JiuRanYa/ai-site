@@ -6,7 +6,8 @@
   "product": {
     "preview": "预览",
     "loadMore": "加载更多",
-    "noMore": "没有更多项目了"
+    "noMore": "没有更多项目了",
+    "retry": "重试"
   },
   "categories": {
     "today": "今日",
