@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import Image from 'next/image'
 // 定义产品类型
 type Product = {
@@ -65,6 +65,7 @@ export default function ProjectCards({
   const [loadCount, setLoadCount] = useState(0)
   const [autoLoad, setAutoLoad] = useState(true)
   const observerTarget = useRef<HTMLDivElement>(null)
+  const initialLoadRef = useRef(true)
 
   const resetAutoLoad = () => {
     setLoadCount(0)
@@ -83,14 +84,11 @@ export default function ProjectCards({
       setHasMore(result.pagination.hasMore)
       setPage(prev => prev + 1)
       
-      // 如果是手动加载模式，点击后重置计数和自动加载
       if (!autoLoad) {
         resetAutoLoad()
       } else {
-        // 自动加载模式下，增加计数
         setLoadCount(prev => {
           const newCount = prev + 1
-          // 当达到3次时，停止自动加载
           if (newCount >= 3) {
             setAutoLoad(false)
           }
@@ -105,22 +103,39 @@ export default function ProjectCards({
     }
   }
 
+  const loadMoreCallback = useCallback(loadMore, [
+    loading,
+    hasMore,
+    error,
+    category,
+    page,
+    query,
+    autoLoad
+  ])
+
   useEffect(() => {
-    // 当搜索词变化时重置状态
+    // 当搜索词变化时重置状态并滚动到顶部
     setProducts([])
     setPage(1)
     resetAutoLoad()
     setHasMore(true)
-    loadMore()
+    initialLoadRef.current = true
+    loadMoreCallback()
+    window.scrollTo(0, 0)
   }, [category, query])
 
   useEffect(() => {
+    if (initialLoadRef.current) {
+      initialLoadRef.current = false
+      return
+    }
+
     if (!autoLoad) return
 
     const observer = new IntersectionObserver(
       entries => {
         if (entries[0].isIntersecting) {
-          loadMore()
+          loadMoreCallback()
         }
       },
       { threshold: 0.1 }
@@ -135,7 +150,7 @@ export default function ProjectCards({
         observer.unobserve(observerTarget.current)
       }
     }
-  }, [hasMore, loading, autoLoad])
+  }, [hasMore, loading, autoLoad, loadMoreCallback])
 
   return (
    <div className="max-w-7xl mx-auto px-4">
@@ -230,7 +245,7 @@ export default function ProjectCards({
         <span>{error}</span>
        </div>
        <button 
-        onClick={() => loadMore()}
+        onClick={() => loadMoreCallback()}
         className="px-4 py-2 text-sm text-white bg-black rounded-full hover:bg-gray-800 transition-colors flex items-center gap-2"
           >
         <svg 
@@ -252,7 +267,7 @@ export default function ProjectCards({
       )}
      {!loading && !error && hasMore && !autoLoad && (
       <button 
-       onClick={loadMore}
+       onClick={loadMoreCallback}
        className="px-6 py-2 text-sm text-white bg-black rounded-full hover:bg-gray-800 transition-colors flex items-center gap-2"
       >
        <svg 

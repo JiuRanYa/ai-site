@@ -1,4 +1,5 @@
 'use client'
+import { useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import SearchBar from '../(home)/_components/SearchBar'
 import ProjectCards from '../(home)/_components/ProjectCards'
@@ -6,6 +7,10 @@ import ProjectCards from '../(home)/_components/ProjectCards'
 export default function SearchPage() {
   const searchParams = useSearchParams()
   const query = searchParams.get('q')
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
    <div className="flex flex-col min-h-screen">
