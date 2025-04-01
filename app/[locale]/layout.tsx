@@ -10,8 +10,8 @@ import Providers from './providers'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
- title: 'AI Source - 发现最佳AI工具和资源',
- description: '探索世界顶级AI工具，提升设计和开发效率',
+ title: 'Nexus, find the best AI tools',
+ description: 'Nexus is a platform for discovering and sharing the best AI tools for designers and developers.',
 }
 
 export default async function RootLayout({
