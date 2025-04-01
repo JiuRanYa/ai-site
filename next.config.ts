@@ -18,9 +18,6 @@ const nextConfig: NextConfig = {
       }
     ]
   },
-  experimental: {
-    serverComponentsExternalPackages: [],
-  },
   reactStrictMode: false,
 }
 
