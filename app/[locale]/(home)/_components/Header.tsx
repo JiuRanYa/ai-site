@@ -99,7 +99,7 @@ export default function Header() {
    <div className="max-w-7xl mx-auto flex items-center justify-between">
     <div className="flex items-center gap-8">
      <Link href="/" className="text-xl italic me-8" style={{ fontFamily: 'cursive' }}>
-      AI Source
+      <Icons.Logo />
      </Link>
      
      <nav className="hidden md:flex items-center gap-8">
