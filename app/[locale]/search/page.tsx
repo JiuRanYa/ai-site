@@ -1,7 +1,6 @@
 'use client'
 import { useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
-import SearchBar from '../(home)/_components/SearchBar'
 import ProjectCards from '../(home)/_components/ProjectCards'
 
 export default function SearchPage() {
@@ -14,7 +13,6 @@ export default function SearchPage() {
 
   return (
    <div className="flex flex-col min-h-screen">
-
     <main className="flex-1">
      <div className="max-w-7xl mx-auto px-4 py-8">
       <div className="mb-8">
@@ -22,7 +20,7 @@ export default function SearchPage() {
         {query ? `搜索结果: "${query}"` : '所有作品'}
        </h1>
       </div>
-      <ProjectCards query={query || ''} />
+      <ProjectCards />
      </div>
     </main>
    </div>

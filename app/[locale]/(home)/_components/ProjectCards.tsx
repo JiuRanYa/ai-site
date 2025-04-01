@@ -1,6 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { useEffect, useRef, useState, useCallback } from 'react'
+import { useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 // 定义产品类型
 type Product = {
@@ -23,13 +24,10 @@ type ProductsResponse = {
   }
 }
 
-export const getProducts = async (category?: string, page: number = 1, query?: string) => {
+export const getProducts = async (page: number = 1, query?: string) => {
   const baseUrl = 'http://localhost:3001/api/products'
   const url = new URL(baseUrl)
   
-  if (category) {
-    url.searchParams.set('category', category)
-  }
   if (query) {
     url.searchParams.set('q', query)
   }
@@ -50,13 +48,10 @@ const LoadingSpinner = () => (
  </div>
 )
 
-export default function ProjectCards({
-  category,
-  query
-}: {
-  category?: string
-  query?: string
-}) {
+export default function ProjectCards() {
+  const searchParams = useSearchParams()
+  const query = searchParams.get('q')
+  
   const [products, setProducts] = useState<Product[]>([])
   const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(false)
@@ -79,7 +74,7 @@ export default function ProjectCards({
     setError(null)
     
     try {
-      const result = await getProducts(category, page, query)
+      const result = await getProducts(page, query || undefined)
       setProducts(prev => [...prev, ...result.items])
       setHasMore(result.pagination.hasMore)
       setPage(prev => prev + 1)
@@ -107,14 +102,12 @@ export default function ProjectCards({
     loading,
     hasMore,
     error,
-    category,
     page,
     query,
     autoLoad
   ])
 
   useEffect(() => {
-    // 当搜索词变化时重置状态并滚动到顶部
     setProducts([])
     setPage(1)
     resetAutoLoad()
@@ -122,7 +115,7 @@ export default function ProjectCards({
     initialLoadRef.current = true
     loadMoreCallback()
     window.scrollTo(0, 0)
-  }, [category, query])
+  }, [query])
 
   useEffect(() => {
     if (initialLoadRef.current) {
