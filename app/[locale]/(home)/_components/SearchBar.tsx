@@ -2,9 +2,11 @@
 import { useTranslations } from 'next-intl'
 import { useState, useRef, KeyboardEvent, useEffect } from 'react'
 import { useDebounce } from '@/core/hooks/useDebounce'
+import { useRouter } from 'next/navigation'
 
 export default function SearchBar() {
   const t = useTranslations('Hero')
+  const router = useRouter()
   const [inputValue, setInputValue] = useState('')
   const [suggestion, setSuggestion] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
@@ -57,8 +59,17 @@ export default function SearchBar() {
     setInputValue(e.target.value)
   }
 
+  const handleSearch = () => {
+    if (inputValue.trim()) {
+      router.push(`/search?q=${encodeURIComponent(inputValue.trim())}`)
+    }
+  }
+
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Tab' && suggestion) {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      handleSearch()
+    } else if (e.key === 'Tab' && suggestion) {
       e.preventDefault()
       setInputValue(suggestion)
       setSuggestion('')
@@ -99,7 +110,10 @@ export default function SearchBar() {
        </svg>
       </div>
      </div>
-     <button className="bg-pink-500 hover:bg-pink-600 text-white p-3 rounded-full transition-colors">
+     <button 
+      onClick={handleSearch}
+      className="bg-pink-500 hover:bg-pink-600 text-white p-3 rounded-full transition-colors"
+     >
       <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
       </svg>

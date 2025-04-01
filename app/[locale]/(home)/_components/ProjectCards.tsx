@@ -23,14 +23,18 @@ type ProductsResponse = {
   }
 }
 
-export const getProducts = async (category?: string, page: number = 1) => {
-  const baseUrl = 'http://localhost:3001/api/products'
+export const getProducts = async (category?: string, page: number = 1, query?: string) => {
+  const baseUrl = 'http://localhost:3001/api/products/search'
   const url = new URL(baseUrl)
   
   if (category) {
     url.searchParams.set('category', category)
   }
+  if (query) {
+    url.searchParams.set('q', query)
+  }
   url.searchParams.set('page', page.toString())
+  url.searchParams.set('pageSize', '10')
 
   const res = await fetch(url)
   const data = await res.json() as ProductsResponse
@@ -47,9 +51,11 @@ const LoadingSpinner = () => (
 )
 
 export default function ProjectCards({
-  category
+  category,
+  query
 }: {
   category?: string
+  query?: string
 }) {
   const [products, setProducts] = useState<Product[]>([])
   const [page, setPage] = useState(1)
@@ -72,7 +78,7 @@ export default function ProjectCards({
     setError(null)
     
     try {
-      const result = await getProducts(category, page)
+      const result = await getProducts(category, page, query)
       setProducts(prev => [...prev, ...result.items])
       setHasMore(result.pagination.hasMore)
       setPage(prev => prev + 1)
@@ -100,13 +106,13 @@ export default function ProjectCards({
   }
 
   useEffect(() => {
-    // 切换分类时重置所有状态
+    // 当搜索词变化时重置状态
     setProducts([])
     setPage(1)
     resetAutoLoad()
     setHasMore(true)
     loadMore()
-  }, [category])
+  }, [category, query])
 
   useEffect(() => {
     if (!autoLoad) return
