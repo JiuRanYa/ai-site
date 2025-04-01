@@ -18,16 +18,6 @@ const nextConfig: NextConfig = {
       }
     ]
   },
-  webpack: (config) => {
-    return config
-  },
-  webpackDevMiddleware: (config) => {
-    config.watchOptions = {
-      poll: 1000,
-      aggregateTimeout: 300,
-    }
-    return config
-  },
   experimental: {
     serverComponentsExternalPackages: [],
   },

@@ -60,7 +60,6 @@ export default function ProjectCards() {
   const [loadCount, setLoadCount] = useState(0)
   const [autoLoad, setAutoLoad] = useState(true)
   const observerTarget = useRef<HTMLDivElement>(null)
-  const initialLoadRef = useRef(true)
 
   const resetAutoLoad = () => {
     setLoadCount(0)
@@ -112,17 +111,11 @@ export default function ProjectCards() {
     setPage(1)
     resetAutoLoad()
     setHasMore(true)
-    initialLoadRef.current = true
     loadMoreCallback()
     window.scrollTo(0, 0)
   }, [query])
 
   useEffect(() => {
-    if (initialLoadRef.current) {
-      initialLoadRef.current = false
-      return
-    }
-
     if (!autoLoad) return
 
     const observer = new IntersectionObserver(
