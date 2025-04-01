@@ -31,6 +31,7 @@ const nextConfig: NextConfig = {
   experimental: {
     serverComponentsExternalPackages: [],
   },
+  reactStrictMode: false,
 }
 
 const withNextIntl = createNextIntlPlugin('./core/i18n/request.ts')
