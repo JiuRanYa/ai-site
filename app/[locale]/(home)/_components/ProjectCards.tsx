@@ -2,7 +2,7 @@
 'use client'
 import Link from 'next/link'
 import { useRef, useState, useEffect } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
@@ -20,6 +20,7 @@ const LoadingSpinner = () => (
 export default function ProjectCards() {
   const t = useTranslations('product')
   const searchParams = useSearchParams()
+  const router = useRouter()
   const query = searchParams.get('q')
   
   const [autoLoad, setAutoLoad] = useState(true)
@@ -142,15 +143,18 @@ export default function ProjectCards() {
           </p>
                   )}
          </Link>
+        </div>
+        <div className="mt-auto pt-4">
          <div className="flex flex-wrap gap-2">
-          {product.tags?.map((tag: string) => (
-           <span
+          {product.tags?.slice(0, 1).map((tag: string) => (
+           <button
             key={tag}
-            className="px-3 py-1 bg-gray-100 text-gray-600 text-xs rounded-full"
-                    >
+            onClick={() => router.push(`/search?q=${encodeURIComponent(tag)}`)}
+            className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs rounded-full transition-colors cursor-pointer"
+           >
             {tag}
-           </span>
-                  ))}
+           </button>
+          ))}
          </div>
         </div>
        </div>
