@@ -182,13 +182,13 @@ export default function Header() {
       <Icons.BellIcon />
      </button>
 
-     <button 
+     {/* <button 
       onClick={toggleLocale}
       className="flex items-center cursor-pointer gap-1 px-3 py-1.5 rounded-full bg-gray-100 hover:bg-gray-200 text-sm font-medium text-gray-800"
      >
       {locale === 'en' ? '中文' : 'EN'}
       <Icons.LanguageIcon />
-     </button>
+     </button> */}
      
      <Link 
       href="/pro" 
