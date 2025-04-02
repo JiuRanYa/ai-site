@@ -1,4 +1,4 @@
-# https://nexusai.top robots.txt
+# https://nexus.skin robots.txt
 User-agent: *
 Allow: /
 
