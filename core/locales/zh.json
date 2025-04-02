@@ -3,6 +3,70 @@
     "home": "首页",
     "categories": "分类"
   },
+  "pro": {
+    "title": "升级到专业版",
+    "subtitle": "获取高级功能，将您的 AI 工具探索提升到新的水平",
+    "plans": {
+      "basic": {
+        "title": "基础版",
+        "period": "永久",
+        "button": "当前方案",
+        "features": {
+          "Basic search functionality": "基础搜索功能",
+          "Access to public tools": "访问公开工具",
+          "Basic analytics": "基础分析",
+          "Community support": "社区支持"
+        }
+      },
+      "pro": {
+        "title": "专业版",
+        "period": "每月",
+        "button": "升级到专业版",
+        "features": {
+          "Advanced search filters": "高级搜索过滤",
+          "Early access to new tools": "新工具抢先体验",
+          "Detailed analytics": "详细分析报告",
+          "Priority support": "优先支持",
+          "Custom collections": "自定义收藏",
+          "API access": "API 访问",
+          "No advertisements": "无广告"
+        }
+      },
+      "enterprise": {
+        "title": "企业版",
+        "period": "每月",
+        "button": "联系销售",
+        "features": {
+          "All Pro features": "包含所有专业版功能",
+          "Custom integration": "自定义集成",
+          "Dedicated support": "专属支持",
+          "Team collaboration": "团队协作",
+          "Custom branding": "自定义品牌",
+          "Advanced API access": "高级 API 访问",
+          "SLA guarantee": "SLA 保障"
+        }
+      }
+    },
+    "faq": {
+      "title": "常见问题",
+      "cancel": {
+        "question": "可以随时取消吗？",
+        "answer": "是的，您可以随时取消订阅。您将继续享有专业版功能直到当前计费周期结束。"
+      },
+      "payment": {
+        "question": "支持哪些支付方式？",
+        "answer": "我们支持所有主流信用卡、PayPal，企业版还支持银行转账。"
+      },
+      "refund": {
+        "question": "提供退款吗？",
+        "answer": "我们为所有专业版订阅提供 14 天无条件退款保证。"
+      },
+      "enterprise": {
+        "question": "企业版包含哪些内容？",
+        "answer": "企业版包含定制功能、专属支持和根据您需求定制的特殊集成。"
+      }
+    }
+  },
   "product": {
     "preview": "预览",
     "loadMore": "加载更多",
