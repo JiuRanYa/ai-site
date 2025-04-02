@@ -34,7 +34,12 @@ const sendChatMessage = async (message: string): Promise<CompletionResponse> => 
     throw new Error('Network response was not ok')
   }
 
-  return response.json()
+  const data = await response.json()
+  // 只去掉开头的换行符
+  return {
+    ...data,
+    message: data.message.replace(/^\n+/, '')
+  }
 }
 
 export default function Chat({ isOpen, onClose }: ChatProps) {
@@ -124,15 +129,6 @@ export default function Chat({ isOpen, onClose }: ChatProps) {
     {/* 头部 */}
     <div className="flex items-center justify-between p-4 border-b">
      <div className="flex items-center gap-3">
-      <div className="w-8 h-8 rounded-lg overflow-hidden">
-       <Image 
-        src="/favicon/android-chrome-192x192.png" 
-        alt="Nexus AI" 
-        width={32} 
-        height={32}
-        className="w-full h-full object-cover"
-            />
-      </div>
       <div>
        <h2 className="font-semibold">{t('title')}</h2>
        {chatMutation.isPending && (
