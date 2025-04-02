@@ -229,5 +229,16 @@
       "audioGeneration": "Audio Generation",
       "other": "Other"
     }
+  },
+  "chat": {
+    "title": "AI Assistant",
+    "placeholder": "Type a message...",
+    "loading": "Thinking...",
+    "error": "Failed to get response, please try again",
+    "join": "wants to join chat",
+    "accept": "Accept",
+    "decline": "Decline",
+    "team": "HR Team",
+    "typing": "is typing..."
   }
 }

@@ -3,9 +3,12 @@ import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/core/components/hover-card'
 import * as Icons from '@/core/components/icons'
+import { useState } from 'react'
+import Chat from './Chat'
 
 export default function Header() {
  const t = useTranslations('Header')
+ const [isChatOpen, setIsChatOpen] = useState(false)
  // const locale = useLocale()
  // const router = useRouter()
 
@@ -172,7 +175,10 @@ export default function Header() {
     </div>
     
     <div className="flex items-center gap-4">
-     <button className="text-gray-800">
+     <button 
+      onClick={() => setIsChatOpen(true)}
+      className="text-gray-800 hover:text-gray-600 transition-colors"
+     >
       <Icons.ChatIcon />
      </button>
      
@@ -196,6 +202,7 @@ export default function Header() {
      </Link>
     </div>
    </div>
+   <Chat isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
   </header>
  )
 } 

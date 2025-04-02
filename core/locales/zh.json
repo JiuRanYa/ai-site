@@ -229,5 +229,16 @@
       "audioGeneration": "音频生成",
       "other": "其他"
     }
+  },
+  "chat": {
+    "title": "AI 助手",
+    "placeholder": "输入消息...",
+    "loading": "正在思考...",
+    "error": "获取回复失败，请重试",
+    "join": "想要加入聊天",
+    "accept": "接受",
+    "decline": "拒绝",
+    "team": "HR 团队",
+    "typing": "正在输入..."
   }
 }
