@@ -1,20 +1,18 @@
 'use client'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
-import { useLocale } from 'next-intl'
-import { useRouter } from 'next/navigation'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/core/components/hover-card'
 import * as Icons from '@/core/components/icons'
 
 export default function Header() {
  const t = useTranslations('Header')
- const locale = useLocale()
- const router = useRouter()
+ // const locale = useLocale()
+ // const router = useRouter()
 
- const toggleLocale = () => {
-  const newLocale = locale === 'en' ? 'zh' : 'en'
-  router.push(`/${newLocale}${window.location.pathname.replace(/^\/[a-z]{2}/, '')}`)
- }
+ // const toggleLocale = () => {
+ //  const newLocale = locale === 'en' ? 'zh' : 'en'
+ //  router.push(`/${newLocale}${window.location.pathname.replace(/^\/[a-z]{2}/, '')}`)
+ // }
 
  // 定义探索选项
  const exploreOptions = [
