@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
+import Image from 'next/image'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -84,11 +85,6 @@ export default function Chat({ isOpen, onClose }: ChatProps) {
     {/* 头部 */}
     <div className="flex items-center justify-between p-4 border-b">
      <div className="flex items-center gap-3">
-      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-       <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-       </svg>
-      </div>
       <div>
        <h2 className="font-semibold">{t('team')}</h2>
        {isTyping && <p className="text-sm text-gray-500">{t('typing')}</p>}
@@ -113,9 +109,7 @@ export default function Chat({ isOpen, onClose }: ChatProps) {
           >
        {message.role === 'assistant' && (
         <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex-shrink-0 mr-3">
-         <svg className="w-8 h-8 text-white p-1.5" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-         </svg>
+         <Image src="/favicon/android-chrome-192x192.png" alt="Nexus AI" width={32} height={32} className='rounded-lg'/>
         </div>
             )}
        <div className={`flex flex-col ${message.role === 'user' ? 'items-end' : 'items-start'}`}>
