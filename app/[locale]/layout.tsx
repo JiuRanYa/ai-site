@@ -12,6 +12,9 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata = {
  title: 'Nexus, find the best AI tools',
  description: 'Nexus is a platform for discovering and sharing the best AI tools for designers and developers.',
+ verification: {
+   google: '0y2HH_Tp_TjmeR1iqVxeOMiJujmf5ZlpW3dDGmKpuZ4',
+ },
 }
 
 export default async function RootLayout({
