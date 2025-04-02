@@ -231,14 +231,10 @@
     }
   },
   "chat": {
-    "title": "AI Assistant",
+    "title": "Nexus AI Assistant",
+    "welcome": "Hello! How can I help you today? Feel free to ask about AI tools, model applications, or any other questions!",
     "placeholder": "Type a message...",
-    "loading": "Thinking...",
-    "error": "Failed to get response, please try again",
-    "join": "wants to join chat",
-    "accept": "Accept",
-    "decline": "Decline",
-    "team": "Nexus Site Owner",
-    "typing": "is typing..."
+    "typing": "Thinking...",
+    "error": "Sorry, failed to get response. Please try again"
   }
 }

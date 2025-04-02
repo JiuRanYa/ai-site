@@ -231,14 +231,10 @@
     }
   },
   "chat": {
-    "title": "AI 助手",
+    "title": "Nexus AI 助手",
+    "welcome": "你好！有什么我可以帮助你的吗？无论是想了解AI工具、模型应用还是其他问题，随时告诉我~",
     "placeholder": "输入消息...",
-    "loading": "正在思考...",
-    "error": "获取回复失败，请重试",
-    "join": "想要加入聊天",
-    "accept": "接受",
-    "decline": "拒绝",
-    "team": "Nexus 站长",
-    "typing": "正在输入..."
+    "typing": "正在思考...",
+    "error": "抱歉，获取回复失败，请重试"
   }
 }

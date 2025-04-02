@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
+import { useMutation } from '@tanstack/react-query'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -15,11 +16,31 @@ interface ChatProps {
   onClose: () => void
 }
 
+interface CompletionResponse {
+  message: string
+  status: string
+}
+
+const sendChatMessage = async (message: string): Promise<CompletionResponse> => {
+  const response = await fetch('http://localhost:3001/api/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ message }),
+  })
+
+  if (!response.ok) {
+    throw new Error('Network response was not ok')
+  }
+
+  return response.json()
+}
+
 export default function Chat({ isOpen, onClose }: ChatProps) {
   const t = useTranslations('chat')
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
-  const [isTyping, setIsTyping] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   
   const scrollToBottom = () => {
@@ -30,22 +51,57 @@ export default function Chat({ isOpen, onClose }: ChatProps) {
     scrollToBottom()
   }, [messages])
 
-  // 模拟初始消息
+  // 初始消息
   useEffect(() => {
     if (isOpen && messages.length === 0) {
       setMessages([
         {
           role: 'assistant',
-          content: 'I\'m Nexus AI assistant. How can I help you today?',
-          timestamp: '14:04'
+          content: t('welcome'),
+          timestamp: new Date().toLocaleTimeString('en-US', { 
+            hour: '2-digit', 
+            minute: '2-digit',
+            hour12: false 
+          })
         }
       ])
     }
-  }, [isOpen, messages.length])
+  }, [isOpen, messages.length, t])
+
+  const chatMutation = useMutation({
+    mutationFn: sendChatMessage,
+    onSuccess: (data) => {
+      const currentTime = new Date().toLocaleTimeString('en-US', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: false 
+      })
+      
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        content: data.message,
+        timestamp: currentTime
+      }])
+    },
+    onError: (error) => {
+      console.error('Failed to get AI response:', error)
+      const currentTime = new Date().toLocaleTimeString('en-US', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: false 
+      })
+      
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        content: t('error'),
+        timestamp: currentTime
+      }])
+    }
+  })
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!input.trim()) return
+    if (!input.trim() || chatMutation.isPending) return
 
     const userMessage = input.trim()
     const currentTime = new Date().toLocaleTimeString('en-US', { 
@@ -56,26 +112,9 @@ export default function Chat({ isOpen, onClose }: ChatProps) {
 
     setInput('')
     setMessages(prev => [...prev, { role: 'user', content: userMessage, timestamp: currentTime }])
-    setIsTyping(true)
-
-    try {
-      // 模拟 AI 响应
-      setTimeout(() => {
-        setMessages(prev => [...prev, {
-          role: 'assistant',
-          content: '这是一个模拟的回复。实际实现时需要调用 AI API。',
-          timestamp: new Date().toLocaleTimeString('en-US', { 
-            hour: '2-digit', 
-            minute: '2-digit',
-            hour12: false 
-          })
-        }])
-        setIsTyping(false)
-      }, 1000)
-    } catch (error) {
-      console.error('Failed to get AI response:', error)
-      setIsTyping(false)
-    }
+    
+    // 发送消息到 API
+    chatMutation.mutate(userMessage)
   }
 
   if (!isOpen) return null
@@ -85,9 +124,20 @@ export default function Chat({ isOpen, onClose }: ChatProps) {
     {/* 头部 */}
     <div className="flex items-center justify-between p-4 border-b">
      <div className="flex items-center gap-3">
+      <div className="w-8 h-8 rounded-lg overflow-hidden">
+       <Image 
+        src="/favicon/android-chrome-192x192.png" 
+        alt="Nexus AI" 
+        width={32} 
+        height={32}
+        className="w-full h-full object-cover"
+            />
+      </div>
       <div>
-       <h2 className="font-semibold">{t('team')}</h2>
-       {isTyping && <p className="text-sm text-gray-500">{t('typing')}</p>}
+       <h2 className="font-semibold">{t('title')}</h2>
+       {chatMutation.isPending && (
+        <p className="text-sm text-gray-500">{t('typing')}</p>
+            )}
       </div>
      </div>
      <button
@@ -108,8 +158,14 @@ export default function Chat({ isOpen, onClose }: ChatProps) {
        className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
           >
        {message.role === 'assistant' && (
-        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex-shrink-0 mr-3">
-         <Image src="/favicon/android-chrome-192x192.png" alt="Nexus AI" width={32} height={32} className='rounded-lg'/>
+        <div className="w-8 h-8 rounded-lg overflow-hidden flex-shrink-0 mr-3">
+         <Image 
+          src="/favicon/android-chrome-192x192.png" 
+          alt="Nexus AI" 
+          width={32} 
+          height={32}
+          className="w-full h-full object-cover"
+                />
         </div>
             )}
        <div className={`flex flex-col ${message.role === 'user' ? 'items-end' : 'items-start'}`}>
@@ -144,16 +200,23 @@ export default function Chat({ isOpen, onClose }: ChatProps) {
        value={input}
        onChange={(e) => setInput(e.target.value)}
        placeholder={t('placeholder')}
-       className="flex-1 px-4 py-2 border rounded-full focus:outline-none focus:border-blue-500"
+       disabled={chatMutation.isPending}
+       className="flex-1 px-4 py-2 border rounded-full focus:outline-none focus:border-blue-500 disabled:bg-gray-50 disabled:cursor-not-allowed"
           />
       <button
        type="submit"
-       disabled={!input.trim()}
-       className="p-2 bg-black text-white rounded-full hover:bg-gray-800 disabled:opacity-50 disabled:hover:bg-black"
+       disabled={!input.trim() || chatMutation.isPending}
+       className="p-2 bg-black text-white rounded-full hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-       <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-       </svg>
+       {chatMutation.isPending ? (
+        <svg className="w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+        </svg>
+            ) : (
+             <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+             </svg>
+            )}
       </button>
      </form>
     </div>
