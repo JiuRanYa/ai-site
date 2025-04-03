@@ -37,7 +37,7 @@ export const metadata = {
    description: 'Explore curated AI tools for coding, design, and content creation. Find, compare, and choose the best AI solutions for your needs.',
    type: 'website',
    url: 'https://nexus.skin',
-   images: ['https://nexus.skin/social/home.jpg'],
+   images: ['https://nexus.skin/favicon/android-chrome-512x512.png'],
    siteName: 'Nexus AI Directory',
  },
  twitter: {
@@ -45,7 +45,7 @@ export const metadata = {
    site: '@nexus_skin',
    title: 'Nexus AI Directory | Discover & Compare Top AI Tools',
    description: 'Explore curated AI tools for coding, design, and content creation. Find, compare, and choose the best AI solutions for your needs.',
-   images: ['https://nexus.skin/social/home.jpg'],
+   images: ['https://nexus.skin/favicon/android-chrome-512x512.png'],
  },
 }
 
