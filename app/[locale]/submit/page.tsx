@@ -17,7 +17,7 @@ const formSchema = z.object({
   url: z.string().min(1, 'errors.required').url('errors.invalidUrl'),
   description: z.string().min(1, 'errors.required'),
   tags: z.array(z.string()).min(1, 'errors.required'),
-  image: z.any().refine((file) => file !== null, 'errors.imageRequired'),
+  image: z.any()
 })
 
 type FormValues = z.infer<typeof formSchema>
@@ -40,6 +40,7 @@ export default function SubmitPage() {
   const t = useTranslations('SubmitForm')
   const [imagePreview, setImagePreview] = useState('')
   const [isSuccess, setIsSuccess] = useState(false)
+  const [currentTag, setCurrentTag] = useState('')
   
   // 使用 react-hook-form
   const {
@@ -47,7 +48,8 @@ export default function SubmitPage() {
     handleSubmit,
     formState: { errors },
     setValue,
-    reset
+    reset,
+    watch
   } = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -58,6 +60,22 @@ export default function SubmitPage() {
       image: null,
     }
   })
+
+  const tags = watch('tags') || []
+  
+  const handleAddTag = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && currentTag.trim()) {
+      e.preventDefault()
+      if (!tags.includes(currentTag.trim())) {
+        setValue('tags', [...tags, currentTag.trim()])
+      }
+      setCurrentTag('')
+    }
+  }
+
+  const handleRemoveTag = (tagToRemove: string) => {
+    setValue('tags', tags.filter(tag => tag !== tagToRemove))
+  }
   
   // 使用 react-query 的 mutation
   const mutation = useMutation({
@@ -89,14 +107,21 @@ export default function SubmitPage() {
   }
   
   const onSubmit = (data: FormValues) => {
+    console.log('Form data:', data)
+    
     const formData = new FormData()
     formData.append('title', data.title)
     formData.append('url', data.url)
     formData.append('description', data.description)
-    formData.append('tags', JSON.stringify(data.tags))
+    formData.append('tags', data.tags)
     
-    if (data.image) {
+    if (imagePreview) {
       formData.append('image', data.image)
+    }
+    
+    console.log('FormData entries:')
+    for (const [key, value] of formData.entries()) {
+      console.log(key, value)
     }
     
     mutation.mutate(formData)
@@ -187,6 +212,49 @@ export default function SubmitPage() {
           </div>
           <p className="mt-2 text-xs text-gray-500">{t('tips.description')}</p>
          </div>
+
+         {/* 标签 */}
+         <div>
+          <label htmlFor="tags" className="block text-sm font-medium text-gray-700">
+           {t('fields.tags')} <span className="text-red-500">*</span>
+          </label>
+          <div className="mt-1">
+           <div className="flex flex-wrap gap-2 mb-2">
+            {tags.map((tag) => (
+             <span
+              key={tag}
+              className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
+             >
+              {tag}
+              <button
+               type="button"
+               onClick={() => handleRemoveTag(tag)}
+               className="ml-1 inline-flex items-center p-0.5 hover:bg-blue-200 rounded-full"
+              >
+               <svg className="h-3 w-3" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                 fillRule="evenodd"
+                 d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                 clipRule="evenodd"
+                />
+               </svg>
+              </button>
+             </span>
+            ))}
+           </div>
+           <Input
+            type="text"
+            value={currentTag}
+            onChange={(e) => setCurrentTag(e.target.value)}
+            onKeyDown={handleAddTag}
+            placeholder={t('placeholders.tags')}
+           />
+           {errors.tags && (
+            <p className="mt-1 text-xs text-red-600">{t(errors.tags.message as string)}</p>
+           )}
+           <p className="mt-2 text-xs text-gray-500">{t('tips.tags')}</p>
+          </div>
+         </div>
             
          {/* 产品截图 */}
          <div>
@@ -235,7 +303,7 @@ export default function SubmitPage() {
               <div className="flex text-sm text-gray-600">
                <label
                 htmlFor="image"
-                className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
+                className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 hover:text-indigo-500"
                >
                 <span>{t('buttons.uploadImage')}</span>
                 <input
@@ -249,9 +317,6 @@ export default function SubmitPage() {
                <p className="pl-1">{t('tips.dragAndDrop')}</p>
               </div>
              </>
-            )}
-            {errors.image && (
-             <p className="mt-1 text-xs text-red-600">{t(errors.image.message as string)}</p>
             )}
            </div>
           </div>
