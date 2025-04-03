@@ -2,8 +2,5 @@
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://nexus.skin/sitemap.xml
-
 # Crawl-delay
 Crawl-delay: 10 
