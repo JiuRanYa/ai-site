@@ -7,6 +7,20 @@ import { Input } from '@/core/components/input'
 import { Textarea } from '@/core/components/textarea'
 import { Button } from '@/core/components/button'
 import { useMutation } from '@tanstack/react-query'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as z from 'zod'
+
+// 定义表单验证 schema
+const formSchema = z.object({
+  title: z.string().min(1, 'errors.required'),
+  url: z.string().min(1, 'errors.required').url('errors.invalidUrl'),
+  description: z.string().min(1, 'errors.required'),
+  tags: z.array(z.string()).min(1, 'errors.required'),
+  image: z.any().refine((file) => file !== null, 'errors.imageRequired'),
+})
+
+type FormValues = z.infer<typeof formSchema>
 
 // 提交工具的接口
 async function submitTool(data: FormData) {
@@ -24,18 +38,26 @@ async function submitTool(data: FormData) {
 
 export default function SubmitPage() {
   const t = useTranslations('SubmitForm')
-  
-  const [formData, setFormData] = useState({
-    title: '',
-    url: '',
-    description: '',
-    image: null as File | null,
-    imagePreview: '',
-    tags: [] as string[],
-  })
-  
-  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [imagePreview, setImagePreview] = useState('')
   const [isSuccess, setIsSuccess] = useState(false)
+  
+  // 使用 react-hook-form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+    reset
+  } = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      title: '',
+      url: '',
+      description: '',
+      tags: [],
+      image: null,
+    }
+  })
   
   // 使用 react-query 的 mutation
   const mutation = useMutation({
@@ -43,14 +65,8 @@ export default function SubmitPage() {
     onSuccess: () => {
       setIsSuccess(true)
       // 重置表单
-      setFormData({
-        title: '',
-        url: '',
-        description: '',
-        image: null,
-        imagePreview: '',
-        tags: [],
-      })
+      reset()
+      setImagePreview('')
     },
     onError: (error) => {
       console.error('Error submitting form:', error)
@@ -58,88 +74,32 @@ export default function SubmitPage() {
     }
   })
   
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
-    
-    // Clear error when user types
-    if (errors[name]) {
-      setErrors(prev => {
-        const newErrors = { ...prev }
-        delete newErrors[name]
-        return newErrors
-      })
-    }
-  }
-  
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0]
       const reader = new FileReader()
       
       reader.onload = (event) => {
-        setFormData(prev => ({
-          ...prev,
-          image: file,
-          imagePreview: event.target?.result as string
-        }))
+        setImagePreview(event.target?.result as string)
+        setValue('image', file)
       }
       
       reader.readAsDataURL(file)
-      
-      // Clear error
-      if (errors.image) {
-        setErrors(prev => {
-          const newErrors = { ...prev }
-          delete newErrors.image
-          return newErrors
-        })
-      }
     }
   }
   
-  const validateForm = () => {
-    const newErrors: Record<string, string> = {}
+  const onSubmit = (data: FormValues) => {
+    const formData = new FormData()
+    formData.append('title', data.title)
+    formData.append('url', data.url)
+    formData.append('description', data.description)
+    formData.append('tags', JSON.stringify(data.tags))
     
-    if (!formData.title.trim()) newErrors.title = t('errors.required')
-    if (!formData.url.trim()) newErrors.url = t('errors.required')
-    if (!formData.description.trim()) newErrors.description = t('errors.required')
-    if (!formData.tags.length) newErrors.tags = t('errors.required')
-    
-    // URL validation
-    if (formData.url && !/^https?:\/\/.+\..+/.test(formData.url)) {
-      newErrors.url = t('errors.invalidUrl')
+    if (data.image) {
+      formData.append('image', data.image)
     }
     
-    // Image validation
-    if (!formData.image && !formData.imagePreview) {
-      newErrors.image = t('errors.imageRequired')
-    }
-    
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
-  
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    
-    console.log(formData, !validateForm())
-    // if (!validateForm()) return
-    
-    // 创建 FormData 对象
-    const formDataToSubmit = new FormData()
-    formDataToSubmit.append('title', formData.title)
-    formDataToSubmit.append('url', formData.url)
-    formDataToSubmit.append('description', formData.description)
-    formDataToSubmit.append('tags', JSON.stringify(formData.tags))
-    
-    // 添加图片文件
-    if (formData.image) {
-      formDataToSubmit.append('image', formData.image)
-    }
-    
-    // 提交表单
-    mutation.mutate(formDataToSubmit)
+    mutation.mutate(formData)
   }
   
   return (
@@ -170,23 +130,23 @@ export default function SubmitPage() {
       </div>
      </div>
       ) : (
-       <form onSubmit={handleSubmit} className="space-y-8">
+       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
         <div className="space-y-6">
          {/* 项目名称 */}
          <div>
           <label htmlFor="title" className="block text-sm font-medium text-gray-700">
-           {t('title')} <span className="text-red-500">*</span>
+           {t('fields.title')} <span className="text-red-500">*</span>
           </label>
           <div className="mt-1">
            <Input
             type="text"
-            name="title"
             id="title"
-            value={formData.title}
-            onChange={handleInputChange}
+            {...register('title')}
             placeholder={t('placeholders.title')}
-                />
-           {errors.title && <p className="mt-1 text-xs text-red-600">{errors.title}</p>}
+           />
+           {errors.title && (
+            <p className="mt-1 text-xs text-red-600">{t(errors.title.message as string)}</p>
+           )}
           </div>
          </div>
             
@@ -198,13 +158,13 @@ export default function SubmitPage() {
           <div className="mt-1">
            <Input
             type="url"
-            name="url"
             id="url"
-            value={formData.url}
-            onChange={handleInputChange}
+            {...register('url')}
             placeholder="https://example.com"
-                />
-           {errors.url && <p className="mt-1 text-xs text-red-600">{errors.url}</p>}
+           />
+           {errors.url && (
+            <p className="mt-1 text-xs text-red-600">{t(errors.url.message as string)}</p>
+           )}
           </div>
          </div>
             
@@ -216,14 +176,14 @@ export default function SubmitPage() {
           <div className="mt-1">
            <Textarea
             id="description"
-            name="description"
             rows={4}
-            value={formData.description}
-            onChange={handleInputChange}
+            {...register('description')}
             placeholder={t('placeholders.description')}
             className="h-24"
            />
-           {errors.description && <p className="mt-1 text-xs text-red-600">{errors.description}</p>}
+           {errors.description && (
+            <p className="mt-1 text-xs text-red-600">{t(errors.description.message as string)}</p>
+           )}
           </div>
           <p className="mt-2 text-xs text-gray-500">{t('tips.description')}</p>
          </div>
@@ -236,10 +196,10 @@ export default function SubmitPage() {
               
           <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
            <div className="space-y-1 text-center">
-            {formData.imagePreview ? (
+            {imagePreview ? (
              <div className="mt-2">
               <Image 
-               src={formData.imagePreview} 
+               src={imagePreview} 
                alt="Preview" 
                className="max-h-64 mx-auto rounded-md shadow-sm" 
                width={256}
@@ -247,40 +207,61 @@ export default function SubmitPage() {
               />
               <button
                type="button"
+               onClick={() => {
+                setImagePreview('')
+                setValue('image', null)
+               }}
                className="mt-2 text-sm text-red-600 hover:text-red-800"
-               onClick={() => setFormData(prev => ({ ...prev, image: null, imagePreview: '' }))}
               >
                {t('buttons.removeImage')}
               </button>
              </div>
-                  ) : (
-                   <>
-                    <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
-                     <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    <div className="flex text-sm text-gray-600">
-                     <label htmlFor="file-upload" className="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
-                      <span>{t('buttons.uploadImage')}</span>
-                      <input id="file-upload" name="file-upload" type="file" accept="image/*" className="sr-only" onChange={handleImageChange} />
-                     </label>
-                     <p className="pl-1">{t('tips.dragAndDrop')}</p>
-                    </div>
-                    <p className="text-xs text-gray-500">
-                     PNG, JPG, GIF up to 10MB
-                    </p>
-                   </>
-                  )}
+            ) : (
+             <>
+              <svg
+               className="mx-auto h-12 w-12 text-gray-400"
+               stroke="currentColor"
+               fill="none"
+               viewBox="0 0 48 48"
+               aria-hidden="true"
+              >
+               <path
+                d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+               />
+              </svg>
+              <div className="flex text-sm text-gray-600">
+               <label
+                htmlFor="image"
+                className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
+               >
+                <span>{t('buttons.uploadImage')}</span>
+                <input
+                 id="image"
+                 type="file"
+                 className="sr-only"
+                 accept="image/*"
+                 onChange={handleImageChange}
+                />
+               </label>
+               <p className="pl-1">{t('tips.dragAndDrop')}</p>
+              </div>
+             </>
+            )}
+            {errors.image && (
+             <p className="mt-1 text-xs text-red-600">{t(errors.image.message as string)}</p>
+            )}
            </div>
           </div>
-          {errors.image && <p className="mt-1 text-xs text-red-600">{errors.image}</p>}
          </div>
         </div>
-          
-        <div className="pt-4" >
-         <div className="flex justify-end gap-2">
+            
+        <div className="pt-5">
+         <div className="flex justify-end">
           <Button
            type="submit"
-           onClick={handleSubmit}
            disabled={mutation.isPending}
           >
            {mutation.isPending ? t('buttons.submitting') : t('buttons.submit')}
