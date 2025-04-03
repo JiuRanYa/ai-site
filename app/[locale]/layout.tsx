@@ -11,8 +11,8 @@ import Script from 'next/script'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
- title: 'Nexus, find the best AI tools',
- description: 'Nexus is a platform for discovering and sharing the best AI tools for designers and developers.',
+ title: 'Nexus AI Directory | Discover & Compare Top AI Tools',
+ description: 'Explore curated AI tools for coding, design, and content creation. Find, compare, and choose the best AI solutions for your needs. Updated daily with the latest AI innovations.',
  verification: {
    google: '0y2HH_Tp_TjmeR1iqVxeOMiJujmf5ZlpW3dDGmKpuZ4',
  },
