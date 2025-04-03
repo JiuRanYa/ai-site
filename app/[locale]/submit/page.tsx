@@ -24,7 +24,7 @@ type FormValues = z.infer<typeof formSchema>
 
 // 提交工具的接口
 async function submitTool(data: FormData) {
-  const response = await fetch('/api/submits', {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/submits`, {
     method: 'POST',
     body: data,
   })
