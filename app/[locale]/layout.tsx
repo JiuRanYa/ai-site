@@ -15,6 +15,22 @@ export const metadata = {
  verification: {
    google: '0y2HH_Tp_TjmeR1iqVxeOMiJujmf5ZlpW3dDGmKpuZ4',
  },
+ keywords: [
+   // 主要关键词
+   'AI directory',
+   'artificial intelligence tools',
+   
+   // 功能相关
+   'code generation',
+   'image generation',
+   'writing assistant',
+   
+   'coding tools',
+   'design tools',
+   
+   'AI tools ranking',
+   'best AI tools'
+ ],
 }
 
 export default async function RootLayout({
