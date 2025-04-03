@@ -113,7 +113,7 @@ export default function SubmitPage() {
     formData.append('title', data.title)
     formData.append('url', data.url)
     formData.append('description', data.description)
-    formData.append('tags', data.tags.join(', '))
+    formData.append('tags', data.tags as unknown as string)
     
     if (imagePreview) {
       formData.append('image', data.image)
