@@ -195,6 +195,7 @@
       "tags": "Enter tags and press Enter"
     },
     "tips": {
+      "tags": "Enter tags and press Enter",
       "description": "A clear, concise description helps users understand what your tool does.",
       "dragAndDrop": "or drag and drop"
     },

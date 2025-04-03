@@ -196,7 +196,8 @@
     },
     "tips": {
       "description": "清晰简洁的描述有助于用户理解您的工具功能。",
-      "dragAndDrop": "或拖拽上传"
+      "dragAndDrop": "或拖拽上传",
+      "tags": "输入标签，按回车键添加"
     },
     "buttons": {
       "uploadImage": "上传文件",
