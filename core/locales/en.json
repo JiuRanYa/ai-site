@@ -183,51 +183,37 @@
     "title": "Submit Your AI Tool",
     "description": "Share your AI tool with our community. We showcase the best AI tools to help creators and businesses discover new resources.",
     "fields": {
-      "name": "Tool Name",
+      "title": "Tool Name",
       "url": "Website URL",
       "description": "Description",
       "image": "Screenshot",
-      "email": "Contact Email",
-      "category": "Category"
+      "tags": "Tags"
     },
     "placeholders": {
-      "name": "Enter the name of your AI tool",
+      "title": "Enter the name of your AI tool",
       "description": "Describe what your tool does, its key features, and why it's valuable",
-      "category": "Select a category"
+      "tags": "Enter tags and press Enter"
     },
     "tips": {
       "description": "A clear, concise description helps users understand what your tool does.",
-      "dragAndDrop": "or drag and drop",
-      "email": "We'll use this to contact you about your submission and notify you when it's live."
+      "dragAndDrop": "or drag and drop"
     },
     "buttons": {
       "uploadImage": "Upload a file",
       "removeImage": "Remove image",
-      "cancel": "Cancel",
       "submit": "Submit Tool",
-      "submitting": "Submitting...",
-      "continue": "Continue"
+      "submitting": "Submitting..."
     },
     "errors": {
       "required": "This field is required",
       "invalidUrl": "Please enter a valid URL",
-      "invalidEmail": "Please enter a valid email address",
       "imageRequired": "Please upload a screenshot of your tool",
-      "submitFailed": "Something went wrong. Please try again."
+      "submitFailed": "Submission failed, please try again"
     },
     "success": {
       "title": "Submission Received!",
       "message": "Thank you for submitting your AI tool. We'll review it and add it to our directory soon.",
       "submitAnother": "Submit another tool"
-    },
-    "categories": {
-      "design": "Design & Creative",
-      "coding": "Coding & Development",
-      "productivity": "Productivity",
-      "imageGeneration": "Image Generation",
-      "textGeneration": "Text Generation",
-      "audioGeneration": "Audio Generation",
-      "other": "Other"
     }
   },
   "chat": {

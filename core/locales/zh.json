@@ -183,51 +183,37 @@
     "title": "提交您的AI工具",
     "description": "与我们的社区分享您的AI工具。我们展示最佳AI工具，帮助创作者和企业发现新资源。",
     "fields": {
-      "name": "工具名称",
+      "title": "工具名称",
       "url": "网站链接",
       "description": "描述",
       "image": "截图",
-      "email": "联系邮箱",
-      "category": "分类"
+      "tags": "标签"
     },
     "placeholders": {
-      "name": "输入您的AI工具名称",
+      "title": "输入您的AI工具名称",
       "description": "描述您的工具功能、主要特点及其价值",
-      "category": "选择一个分类"
+      "tags": "输入标签，按回车键添加"
     },
     "tips": {
       "description": "清晰简洁的描述有助于用户理解您的工具功能。",
-      "dragAndDrop": "或拖拽上传",
-      "email": "我们将使用此邮箱联系您了解提交情况，并在工具上线时通知您。"
+      "dragAndDrop": "或拖拽上传"
     },
     "buttons": {
       "uploadImage": "上传文件",
       "removeImage": "移除图片",
-      "cancel": "取消",
       "submit": "提交工具",
-      "submitting": "提交中...",
-      "continue": "继续"
+      "submitting": "提交中..."
     },
     "errors": {
       "required": "此字段为必填项",
       "invalidUrl": "请输入有效的URL",
-      "invalidEmail": "请输入有效的电子邮箱",
       "imageRequired": "请上传您工具的截图",
-      "submitFailed": "出了些问题，请重试。"
+      "submitFailed": "提交失败，请重试"
     },
     "success": {
       "title": "提交成功！",
       "message": "感谢您提交AI工具。我们将审核并尽快将其添加到我们的目录中。",
       "submitAnother": "提交另一个工具"
-    },
-    "categories": {
-      "design": "设计与创意",
-      "coding": "编程与开发",
-      "productivity": "生产力工具",
-      "imageGeneration": "图像生成",
-      "textGeneration": "文本生成",
-      "audioGeneration": "音频生成",
-      "other": "其他"
     }
   },
   "chat": {

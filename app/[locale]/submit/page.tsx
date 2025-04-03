@@ -5,35 +5,58 @@ import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { Input } from '@/core/components/input'
 import { Textarea } from '@/core/components/textarea'
-import { Select, SelectValue, SelectTrigger, SelectItem, SelectContent } from '@/core/components/select'
 import { Button } from '@/core/components/button'
+import { useMutation } from '@tanstack/react-query'
+
+// 提交工具的接口
+async function submitTool(data: FormData) {
+  const response = await fetch('/api/submits', {
+    method: 'POST',
+    body: data,
+  })
+  
+  if (!response.ok) {
+    throw new Error('Failed to submit tool')
+  }
+  
+  return response.json()
+}
 
 export default function SubmitPage() {
   const t = useTranslations('SubmitForm')
   
   const [formData, setFormData] = useState({
-    name: '',
+    title: '',
     url: '',
     description: '',
     image: null as File | null,
     imagePreview: '',
-    email: '',
-    category: ''
+    tags: [] as string[],
   })
   
-  const [isSubmitting, setIsSubmitting] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isSuccess, setIsSuccess] = useState(false)
   
-  const categories = [
-    { id: 'design', name: t('categories.design') },
-    { id: 'coding', name: t('categories.coding') },
-    { id: 'productivity', name: t('categories.productivity') },
-    { id: 'imageGeneration', name: t('categories.imageGeneration') },
-    { id: 'textGeneration', name: t('categories.textGeneration') },
-    { id: 'audioGeneration', name: t('categories.audioGeneration') },
-    { id: 'other', name: t('categories.other') }
-  ]
+  // 使用 react-query 的 mutation
+  const mutation = useMutation({
+    mutationFn: submitTool,
+    onSuccess: () => {
+      setIsSuccess(true)
+      // 重置表单
+      setFormData({
+        title: '',
+        url: '',
+        description: '',
+        image: null,
+        imagePreview: '',
+        tags: [],
+      })
+    },
+    onError: (error) => {
+      console.error('Error submitting form:', error)
+      alert(t('errors.submitFailed'))
+    }
+  })
   
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -78,23 +101,17 @@ export default function SubmitPage() {
   const validateForm = () => {
     const newErrors: Record<string, string> = {}
     
-    if (!formData.name.trim()) newErrors.name = t('errors.required')
+    if (!formData.title.trim()) newErrors.title = t('errors.required')
     if (!formData.url.trim()) newErrors.url = t('errors.required')
     if (!formData.description.trim()) newErrors.description = t('errors.required')
-    if (!formData.email.trim()) newErrors.email = t('errors.required')
-    if (!formData.category) newErrors.category = t('errors.required')
+    if (!formData.tags.length) newErrors.tags = t('errors.required')
     
     // URL validation
     if (formData.url && !/^https?:\/\/.+\..+/.test(formData.url)) {
       newErrors.url = t('errors.invalidUrl')
     }
     
-    // Email validation
-    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = t('errors.invalidEmail')
-    }
-    
-    // Image validation (optional in this implementation)
+    // Image validation
     if (!formData.image && !formData.imagePreview) {
       newErrors.image = t('errors.imageRequired')
     }
@@ -106,33 +123,23 @@ export default function SubmitPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
-    if (!validateForm()) return
+    console.log(formData, !validateForm())
+    // if (!validateForm()) return
     
-    setIsSubmitting(true)
+    // 创建 FormData 对象
+    const formDataToSubmit = new FormData()
+    formDataToSubmit.append('title', formData.title)
+    formDataToSubmit.append('url', formData.url)
+    formDataToSubmit.append('description', formData.description)
+    formDataToSubmit.append('tags', JSON.stringify(formData.tags))
     
-    try {
-      // In a real application, you would upload the image and form data to your backend
-      // For this example, we'll just simulate a successful submission
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      
-      setIsSuccess(true)
-      
-      // Reset form after successful submission
-      setFormData({
-        name: '',
-        url: '',
-        description: '',
-        image: null,
-        imagePreview: '',
-        email: '',
-        category: ''
-      })
-    } catch (error) {
-      console.error('Error submitting form:', error)
-      alert(t('errors.submitFailed'))
-    } finally {
-      setIsSubmitting(false)
+    // 添加图片文件
+    if (formData.image) {
+      formDataToSubmit.append('image', formData.image)
     }
+    
+    // 提交表单
+    mutation.mutate(formDataToSubmit)
   }
   
   return (
@@ -167,19 +174,19 @@ export default function SubmitPage() {
         <div className="space-y-6">
          {/* 项目名称 */}
          <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-           {t('fields.name')} <span className="text-red-500">*</span>
+          <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+           {t('title')} <span className="text-red-500">*</span>
           </label>
           <div className="mt-1">
            <Input
             type="text"
-            name="name"
-            id="name"
-            value={formData.name}
+            name="title"
+            id="title"
+            value={formData.title}
             onChange={handleInputChange}
-            placeholder={t('placeholders.name')}
+            placeholder={t('placeholders.title')}
                 />
-           {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name}</p>}
+           {errors.title && <p className="mt-1 text-xs text-red-600">{errors.title}</p>}
           </div>
          </div>
             
@@ -198,26 +205,6 @@ export default function SubmitPage() {
             placeholder="https://example.com"
                 />
            {errors.url && <p className="mt-1 text-xs text-red-600">{errors.url}</p>}
-          </div>
-         </div>
-            
-         {/* 分类 */}
-         <div>
-          <label htmlFor="category" className="block text-sm font-medium text-gray-700">
-           {t('fields.category')} <span className="text-red-500">*</span>
-          </label>
-          <div className="mt-1">
-           <Select>
-            <SelectTrigger className="w-full">
-             <SelectValue placeholder={t('placeholders.category')} />
-            </SelectTrigger>
-            <SelectContent>
-             {categories.map(category => (
-              <SelectItem key={category.id} value={category.id}>{category.name}</SelectItem>
-             ))}
-            </SelectContent>
-           </Select>
-           {errors.category && <p className="mt-1 text-xs text-red-600">{errors.category}</p>}
           </div>
          </div>
             
@@ -287,34 +274,16 @@ export default function SubmitPage() {
           </div>
           {errors.image && <p className="mt-1 text-xs text-red-600">{errors.image}</p>}
          </div>
-            
-         {/* 联系邮箱 */}
-         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-           {t('fields.email')} <span className="text-red-500">*</span>
-          </label>
-          <div className="mt-1">
-           <Input
-            id="email"
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            placeholder="you@example.com"
-                />
-           {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email}</p>}
-          </div>
-          <p className="mt-2 text-xs text-gray-500">{t('tips.email')}</p>
-         </div>
         </div>
           
         <div className="pt-4" >
          <div className="flex justify-end gap-2">
           <Button
            type="submit"
-           disabled={isSubmitting}
+           onClick={handleSubmit}
+           disabled={mutation.isPending}
           >
-           {isSubmitting ? t('buttons.submitting') : t('buttons.submit')}
+           {mutation.isPending ? t('buttons.submitting') : t('buttons.submit')}
           </Button>
          </div>
         </div>
