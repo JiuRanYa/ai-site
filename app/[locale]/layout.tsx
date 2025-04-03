@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'
 import { routing } from '@/core/i18n/routing'
 import {NextIntlClientProvider, hasLocale} from 'next-intl'
 import Providers from './providers'
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -49,6 +50,20 @@ export default async function RootLayout({
  return (
   <html lang={locale}>
    <body className={inter.className}>
+    <Script
+     src="https://www.googletagmanager.com/gtag/js?id=G-M5N0MVWPH9"
+     strategy="afterInteractive"
+      />
+    <Script id="google-analytics" strategy="afterInteractive">
+     {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-M5N0MVWPH9');
+        `}
+    </Script>
+
     <Providers>
      <NextIntlClientProvider>
       <div className="flex flex-col min-h-screen">
