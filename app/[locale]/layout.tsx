@@ -32,6 +32,21 @@ export const metadata = {
    'AI tools ranking',
    'best AI tools'
  ],
+ openGraph: {
+   title: 'Nexus AI Directory | Discover & Compare Top AI Tools',
+   description: 'Explore curated AI tools for coding, design, and content creation. Find, compare, and choose the best AI solutions for your needs.',
+   type: 'website',
+   url: 'https://nexus.skin',
+   image: 'https://nexus.skin/social/home.jpg',
+   siteName: 'Nexus AI Directory',
+ },
+ twitter: {
+   card: 'summary_large_image',
+   site: '@nexus_skin',
+   title: 'Nexus AI Directory | Discover & Compare Top AI Tools',
+   description: 'Explore curated AI tools for coding, design, and content creation. Find, compare, and choose the best AI solutions for your needs.',
+   image: 'https://nexus.skin/social/home.jpg',
+ },
 }
 
 export default async function RootLayout({
