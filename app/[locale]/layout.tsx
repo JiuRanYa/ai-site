@@ -16,26 +16,26 @@ export const metadata = {
  icons: {
    icon: [
      {
-       url: '/favicon/favicon-32x32.png',
+       url: 'https://nexus.skin/favicon/favicon-32x32.png',
        sizes: 'any',
        type: 'image/png'
      },
    ],
    apple: {
-     url: '/favicon/apple-touch-icon.png',
+     url: 'https://nexus.skin/favicon/apple-touch-icon.png',
      sizes: '180x180',
      type: 'image/png'
    },
    other: [
      {
        rel: 'android-chrome',
-       url: '/favicon/android-chrome-192x192.png',
+       url: 'https://nexus.skin/favicon/android-chrome-192x192.png',
        sizes: '192x192',
        type: 'image/png'
      },
      {
        rel: 'android-chrome',
-       url: '/favicon/android-chrome-512x512.png',
+       url: 'https://nexus.skin/favicon/android-chrome-512x512.png',
        sizes: '512x512',
        type: 'image/png'
      }
