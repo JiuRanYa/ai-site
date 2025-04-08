@@ -27,7 +27,7 @@ export default function Hero() {
        <div className="mt-4 md:mt-6 flex flex-wrap items-center justify-center gap-2 md:gap-4">
         <span className="text-gray-500 text-xs md:text-sm">{t('trendingSearches')}:</span>
         <div className="flex flex-wrap gap-1.5 md:gap-2 justify-center">
-         {['landing page', 'e-commerce', 'mobile app', 'logo design', 'dashboard', 'icons'].map((term) => (
+         {['Image Generation', 'Text to Image', 'Write', 'Text to Speech'].map((term) => (
           <a 
            key={term} 
            href={`/search?q=${term}`}
