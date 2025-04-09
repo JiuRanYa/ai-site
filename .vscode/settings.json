@@ -1,7 +1,7 @@
 {
- "editor.tabSize": 1,
+ "editor.tabSize": 2,
  "editor.insertSpaces": true,
- "typescript.format.indentSize": 1,
- "javascript.format.indentSize": 1,
+ "typescript.format.indentSize": 2,
+ "javascript.format.indentSize": 2,
  "editor.detectIndentation": false
 } 
