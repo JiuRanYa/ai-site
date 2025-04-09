@@ -7,6 +7,7 @@ import { useState } from 'react'
 import Chat from './Chat'
 import { useSession } from '@/core/lib/auth'
 import Image from 'next/image'
+import { authClient } from '@/core/lib/auth'
 
 export default function Header() {
  const t = useTranslations('Header')
@@ -208,7 +209,24 @@ export default function Header() {
 
      { session?.user.image 
      ? 
-      <Image src={session.user.image} alt="user" width={32} height={32} className="rounded-full" /> 
+      <HoverCard openDelay={0} closeDelay={50}>
+       <HoverCardTrigger asChild>
+        <button className="outline-none focus:outline-none">
+         <Image src={session.user.image} alt="user" width={32} height={32} className="rounded-full" />
+        </button>
+       </HoverCardTrigger>
+       <HoverCardContent asChild className="w-[200px] rounded-lg p-0" side="bottom" align="end">
+        <div className="p-2">
+         <button
+          onClick={() => authClient.signOut()}
+          className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md"
+         >
+          <Icons.ChatIcon />
+          {t('logout')}
+         </button>
+        </div>
+       </HoverCardContent>
+      </HoverCard>
       : 
       <Link 
        href="/login" 

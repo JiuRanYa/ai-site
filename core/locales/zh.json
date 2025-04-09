@@ -89,6 +89,7 @@
     "submit": "提交",
     "goPro": "升级专业版",
     "login": "登录",
+    "logout": "退出",
     "newAIs": {
      "title": "新AI工具",
      "description": "每日更新的最新AI工具"
