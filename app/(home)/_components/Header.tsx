@@ -221,7 +221,7 @@ export default function Header() {
           onClick={() => authClient.signOut()}
           className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md"
          >
-          <Icons.ChatIcon />
+          <Icons.LogoutIcon />
           {t('logout')}
          </button>
         </div>
