@@ -15,6 +15,9 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         hostname: 'sgltrnagsnfqiependff.supabase.co'
+      },
+      {
+        hostname: 'avatars.githubusercontent.com'
       }
     ]
   },

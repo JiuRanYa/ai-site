@@ -5,10 +5,14 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/core/components
 import * as Icons from '@/core/components/icons'
 import { useState } from 'react'
 import Chat from './Chat'
+import { useSession } from '@/core/lib/auth'
+import Image from 'next/image'
 
 export default function Header() {
  const t = useTranslations('Header')
  const [isChatOpen, setIsChatOpen] = useState(false)
+
+ const { data: session } = useSession()
  // const locale = useLocale()
  // const router = useRouter()
 
@@ -208,13 +212,18 @@ export default function Header() {
       {locale === 'en' ? '中文' : 'EN'}
       <Icons.LanguageIcon />
      </button> */}
-     
-     <Link 
-      href="/login" 
-      className="bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-full text-gray-800 font-medium text-sm"
+
+     { session?.user.image 
+     ? 
+      <Image src={session.user.image} alt="user" width={32} height={32} className="rounded-full" /> 
+      : 
+      <Link 
+       href="/login" 
+       className="bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-full text-gray-800 font-medium text-sm"
      >
-      {t('login')}
-     </Link>
+       {t('login')}
+      </Link>
+     }
     </div>
    </div>
    <Chat isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
