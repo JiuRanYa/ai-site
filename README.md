@@ -1,4 +1,4 @@
-# AI Navigator
+# Next.js 14 
 
 AI Navigator 是一个简洁优雅的人工智能工具导航网站，旨在帮助用户快速找到并使用最适合的AI工具。
 
