@@ -1,7 +1,7 @@
 'use client'
 import { useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
-import ProjectCards from '../(home)/_components/ProjectCards'
+import ProjectCards from '../_components/ProjectCards'
 export default function SearchPage() {
   const searchParams = useSearchParams()
   const query = searchParams.get('q')

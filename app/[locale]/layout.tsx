@@ -5,8 +5,6 @@ import { routing } from '@/core/i18n/routing'
 import {NextIntlClientProvider, hasLocale} from 'next-intl'
 import Providers from './providers'
 import Script from 'next/script'
-import Header from '@/app/[locale]/(home)/_components/Header'
-import Footer from '@/app/[locale]/(home)/_components/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -87,7 +85,6 @@ export default async function RootLayout({
  children: React.ReactNode
  params: { locale: string }
 }) {
-   // Ensure that the incoming `locale` is valid
    const {locale} = await params
    if (!hasLocale(routing.locales, locale)) {
      notFound()
@@ -112,13 +109,7 @@ export default async function RootLayout({
 
     <Providers>
      <NextIntlClientProvider>
-      <div className="flex flex-col min-h-screen">
-       <Header />
-       <main className="flex-grow">
-        {children}
-       </main>
-       <Footer />
-      </div>
+      {children}
      </NextIntlClientProvider>
     </Providers>
    </body>
