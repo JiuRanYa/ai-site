@@ -19,7 +19,7 @@ type ProductsResponse = {
   }
 }
 
-export const fetchProducts = async ({ pageParam = 1, queryKey }: any) => {
+export const fetchProducts = async ({ pageParam = 1, queryKey }: { pageParam: number, queryKey: [string, string | undefined] }) => {
   const [, query] = queryKey
   const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/products`
   const searchParams = new URLSearchParams()
