@@ -1,7 +1,5 @@
 import '@/app/styles/globals.css'
 import { Inter } from 'next/font/google'
-import Header from './(home)/_components/Header'
-import Footer from './(home)/_components/Footer'
 import { notFound } from 'next/navigation'
 import { routing } from '@/core/i18n/routing'
 import {NextIntlClientProvider, hasLocale} from 'next-intl'
@@ -113,11 +111,9 @@ export default async function RootLayout({
     <Providers>
      <NextIntlClientProvider>
       <div className="flex flex-col min-h-screen">
-       <Header />
        <main className="flex-grow">
         {children}
        </main>
-       <Footer />
       </div>
      </NextIntlClientProvider>
     </Providers>
