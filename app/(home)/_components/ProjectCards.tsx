@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 import Link from 'next/link'
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import Image from 'next/image'
@@ -68,7 +68,7 @@ const ProductCard = ({ product, onTagClick }: { product: Product; onTagClick: (t
 )
 
 // 客户端组件用于处理滚动加载
-export default function ProjectCards({ 
+const ProjectCardsContent = ({ 
   initialData = {
     items: [],
     pagination: {
@@ -84,7 +84,7 @@ export default function ProjectCards({
       total: number 
     } 
   } 
-}) {
+}) => {
   const t = useTranslations('product')
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -222,5 +222,21 @@ export default function ProjectCards({
         )}
       </div>
     </div>
+  )
+}
+
+export default function ProjectCards(props: { 
+  initialData?: { 
+    items: Product[]; 
+    pagination: { 
+      hasMore: boolean; 
+      total: number 
+    } 
+  } 
+}) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ProjectCardsContent {...props} />
+    </Suspense>
   )
 } 
