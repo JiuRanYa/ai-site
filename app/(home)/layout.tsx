@@ -1,5 +1,5 @@
-import Header from '@/app/[locale]/(home)/_components/Header'
-import Footer from '@/app/[locale]/(home)/_components/Footer'
+import Header from '@/app/(home)/_components/Header'
+import Footer from '@/app/(home)/_components/Footer'
 
 export default function HomeLayout({
   children,

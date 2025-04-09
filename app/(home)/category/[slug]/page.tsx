@@ -1,5 +1,5 @@
-import CategoryNav from '@/app/[locale]/(home)/_components/CategoryNav'
-import ProjectCards from '@/app/[locale]/(home)/_components/ProjectCards'
+import CategoryNav from '@/app/(home)/_components/CategoryNav'
+import ProjectCards from '@/app/(home)/_components/ProjectCards'
 
 export default async function CategoryPage() {
 
