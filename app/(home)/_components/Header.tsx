@@ -13,13 +13,6 @@ export default function Header() {
  const [isChatOpen, setIsChatOpen] = useState(false)
 
  const { data: session } = useSession()
- // const locale = useLocale()
- // const router = useRouter()
-
- // const toggleLocale = () => {
- //  const newLocale = locale === 'en' ? 'zh' : 'en'
- //  router.push(`/${newLocale}${window.location.pathname.replace(/^\/[a-z]{2}/, '')}`)
- // }
 
  // 定义探索选项
  const exploreOptions = [
