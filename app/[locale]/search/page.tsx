@@ -2,7 +2,6 @@
 import { useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import ProjectCards from '../(home)/_components/ProjectCards'
-
 export default function SearchPage() {
   const searchParams = useSearchParams()
   const query = searchParams.get('q')
@@ -20,7 +19,13 @@ export default function SearchPage() {
         {query ? `搜索结果: "${query}"` : '所有作品'}
        </h1>
       </div>
-      <ProjectCards />
+      <ProjectCards initialData={{
+        items: [],
+        pagination: {
+          hasMore: false,
+          total: 0
+        }
+      }} />
      </div>
     </main>
    </div>

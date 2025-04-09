@@ -17,7 +17,58 @@ const LoadingSpinner = () => (
  </div>
 )
 
-export default function ProjectCards() {
+// 产品卡片组件
+const ProductCard = ({ product, onTagClick }: { product: Product; onTagClick: (tag: string) => void }) => (
+ <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow flex flex-col h-full">
+  <div className="aspect-[4/3] w-full bg-gray-100 relative">
+   {product.image ? (
+    <Image
+     src={product.image}
+     alt={product.title}
+     fill
+     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+     className="object-cover"
+     loading="lazy"
+        />
+      ) : (
+       <div className="w-full h-full flex items-center justify-center text-gray-400">
+        <svg className="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+       </div>
+      )}
+  </div>
+
+  <div className="p-6 flex-1 flex flex-col">
+   <div className="flex-1">
+    <Link href={product.url} target="_blank" className="block group">
+     <h3 className="text-lg font-medium text-gray-900 mb-2 group-hover:text-gray-600 transition-colors">
+      {product.title}
+     </h3>
+     {product.description && (
+      <p className="text-sm text-gray-500 mb-3 line-clamp-2">{product.description}</p>
+          )}
+    </Link>
+   </div>
+   <div className="mt-auto pt-4">
+    <div className="flex flex-wrap gap-2">
+     {product.tags?.slice(0, 1).map((tag: string) => (
+      <button
+       key={tag}
+       onClick={() => onTagClick(tag)}
+       className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs rounded-full transition-colors cursor-pointer"
+            >
+       {tag}
+      </button>
+          ))}
+    </div>
+   </div>
+  </div>
+ </div>
+)
+
+// 客户端组件用于处理滚动加载
+export default function ProjectCards({ initialData }: { initialData: { items: Product[]; pagination: { hasMore: boolean; total: number } } }) {
   const t = useTranslations('product')
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -36,9 +87,13 @@ export default function ProjectCards() {
     error
   } = useInfiniteQuery({
     queryKey: ['products', query || undefined],
-    queryFn: fetchProducts,
+    queryFn: ({ pageParam = 1 }) => fetchProducts({ pageParam, queryKey: ['products', query || undefined] }),
     getNextPageParam: (lastPage, pages) => {
       return lastPage.pagination.hasMore ? pages.length + 1 : undefined
+    },
+    initialData: {
+      pages: [initialData],
+      pageParams: [1]
     },
     initialPageParam: 1
   })
@@ -90,75 +145,19 @@ export default function ProjectCards() {
 
   const allProducts = data?.pages.flatMap(page => page.items) || []
 
+  const handleTagClick = (tag: string) => {
+    router.push(`/search?q=${encodeURIComponent(tag)}`)
+  }
+
   return (
    <div className="max-w-7xl mx-auto px-4">
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
      {allProducts.map((product: Product, index: number) => (
-      <div
+      <ProductCard
        key={`${product.id}-${index}`}
-       className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow flex flex-col h-full"
-          >
-       <div className="aspect-[4/3] w-full bg-gray-100 relative">
-        {product.image ? (
-         <Image
-          src={product.image}
-          alt={product.title}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-          className="object-cover"
-          loading="lazy"
-                />
-              ) : (
-               <div className="w-full h-full flex items-center justify-center text-gray-400">
-                <svg
-                 className="w-12 h-12"
-                 fill="none"
-                 viewBox="0 0 24 24"
-                 stroke="currentColor"
-                  >
-                 <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                </svg>
-               </div>
-              )}
-       </div>
-
-       <div className="p-6 flex-1 flex flex-col">
-        <div className="flex-1">
-         <Link
-          href={product.url}
-          target="_blank"
-          className="block group"
-                >
-          <h3 className="text-lg font-medium text-gray-900 mb-2 group-hover:text-gray-600 transition-colors">
-           {product.title}
-          </h3>
-          {product.description && (
-          <p className="text-sm text-gray-500 mb-3 line-clamp-2">
-           {product.description}
-          </p>
-                  )}
-         </Link>
-        </div>
-        <div className="mt-auto pt-4">
-         <div className="flex flex-wrap gap-2">
-          {product.tags?.slice(0, 1).map((tag: string) => (
-           <button
-            key={tag}
-            onClick={() => router.push(`/search?q=${encodeURIComponent(tag)}`)}
-            className="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs rounded-full transition-colors cursor-pointer"
-           >
-            {tag}
-           </button>
-          ))}
-         </div>
-        </div>
-       </div>
-      </div>
+       product={product}
+       onTagClick={handleTagClick}
+          />
         ))}
     </div>
       

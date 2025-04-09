@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl'
 import CategoryNav from './CategoryNav'
-import ProjectCards from './ProjectCards'
 import SearchBar from './SearchBar'
+import ProjectCardsServer from './ProjectCardsServer'
 
 export default function Hero() {
  const t = useTranslations('Hero')
@@ -46,7 +46,7 @@ export default function Hero() {
      </div>
      
      <div className="w-full">
-      <ProjectCards />
+      <ProjectCardsServer />
      </div>
     </div>
    </section>
