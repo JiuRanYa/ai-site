@@ -224,5 +224,17 @@
     "placeholder": "Type a message...",
     "typing": "Thinking...",
     "error": "Sorry, failed to get response. Please try again"
+  },
+  "auth": {
+    "createAccount": "Create an account",
+    "emailBelow": "Enter your email below to create your account",
+    "email": "Email",
+    "password": "Password",
+    "emailPlaceholder": "m@example.com",
+    "continueWith": "Or continue with",
+    "alreadyHaveAccount": "Already have an account?",
+    "login": "Login",
+    "createAccountButton": "Create account",
+    "forgotPassword": "Forgot password?"
   }
 }

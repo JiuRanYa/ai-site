@@ -224,5 +224,17 @@
     "placeholder": "输入消息...",
     "typing": "正在思考...",
     "error": "抱歉，获取回复失败，请重试"
+  },
+  "auth": {
+    "createAccount": "创建账户",
+    "emailBelow": "在下方输入您的邮箱以创建账户",
+    "email": "邮箱",
+    "password": "密码",
+    "emailPlaceholder": "m@example.com",
+    "continueWith": "或继续使用",
+    "alreadyHaveAccount": "已经有账户?",
+    "login": "登录",
+    "createAccountButton": "创建账户",
+    "forgotPassword": "忘记密码?"
   }
 }
