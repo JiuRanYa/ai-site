@@ -13,6 +13,29 @@ export default function Header() {
  const t = useTranslations('Header')
  const [isChatOpen, setIsChatOpen] = useState(false)
 
+ const UserDropdown = () => {
+  return (
+   <HoverCard openDelay={0} closeDelay={50}>
+    <HoverCardTrigger asChild>
+     <button className="outline-none focus:outline-none">
+      <Image src={session?.user.image || ''} alt="user" width={32} height={32} className="rounded-full" />
+     </button>
+    </HoverCardTrigger>
+    <HoverCardContent asChild className="w-[200px] rounded-lg p-0" side="bottom" align="end">
+     <div className="p-2">
+      <button
+       onClick={() => authClient.signOut()}
+       className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md"
+         >
+       <Icons.LogoutIcon />
+       {t('logout')}
+      </button>
+     </div>
+    </HoverCardContent>
+   </HoverCard>
+  )
+ }
+
  const { data: session } = useSession()
 
  // 定义探索选项
@@ -207,33 +230,13 @@ export default function Header() {
       <Icons.LanguageIcon />
      </button> */}
 
-     { session?.user.image 
-     ? 
-      <HoverCard openDelay={0} closeDelay={50}>
-       <HoverCardTrigger asChild>
-        <button className="outline-none focus:outline-none">
-         <Image src={session.user.image} alt="user" width={32} height={32} className="rounded-full" />
-        </button>
-       </HoverCardTrigger>
-       <HoverCardContent asChild className="w-[200px] rounded-lg p-0" side="bottom" align="end">
-        <div className="p-2">
-         <button
-          onClick={() => authClient.signOut()}
-          className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md"
-         >
-          <Icons.LogoutIcon />
-          {t('logout')}
-         </button>
-        </div>
-       </HoverCardContent>
-      </HoverCard>
-      : 
-      <Link 
-       href="/login" 
-       className="bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-full text-gray-800 font-medium text-sm"
+     { session?.user.image ?  <UserDropdown /> : 
+     <Link 
+      href="/login" 
+      className="bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-full text-gray-800 font-medium text-sm"
      >
-       {t('login')}
-      </Link>
+      {t('login')}
+     </Link>
      }
     </div>
    </div>
