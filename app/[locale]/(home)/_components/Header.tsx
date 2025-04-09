@@ -209,12 +209,12 @@ export default function Header() {
       <Icons.LanguageIcon />
      </button> */}
      
-     {/* <Link 
+     <Link 
       href="/login" 
       className="bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-full text-gray-800 font-medium text-sm"
      >
       {t('login')}
-     </Link> */}
+     </Link>
     </div>
    </div>
    <Chat isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
