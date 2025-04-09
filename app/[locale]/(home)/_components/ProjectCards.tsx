@@ -68,7 +68,23 @@ const ProductCard = ({ product, onTagClick }: { product: Product; onTagClick: (t
 )
 
 // 客户端组件用于处理滚动加载
-export default function ProjectCards({ initialData }: { initialData: { items: Product[]; pagination: { hasMore: boolean; total: number } } }) {
+export default function ProjectCards({ 
+  initialData = {
+    items: [],
+    pagination: {
+      hasMore: false,
+      total: 0
+    }
+  }
+}: { 
+  initialData?: { 
+    items: Product[]; 
+    pagination: { 
+      hasMore: boolean; 
+      total: number 
+    } 
+  } 
+}) {
   const t = useTranslations('product')
   const searchParams = useSearchParams()
   const router = useRouter()
