@@ -43,6 +43,9 @@ export const metadata = {
  },
  verification: {
    google: '0y2HH_Tp_TjmeR1iqVxeOMiJujmf5ZlpW3dDGmKpuZ4',
+   other: {
+    'baidu-site-verification': 'codeva-QJjg9btzMx'
+   }
  },
  keywords: [
    // 主要关键词
