@@ -1,3 +1,5 @@
+import { fetchClient } from '@/core/lib/fetch'
+
 // 定义产品类型
 export type Product = {
   id: string
@@ -21,17 +23,15 @@ type ProductsResponse = {
 
 export const fetchProducts = async ({ pageParam = 1, queryKey }: { pageParam: number, queryKey: [string, string | undefined] }) => {
   const [, query] = queryKey
-  const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/products`
-  const searchParams = new URLSearchParams()
+  const params: Record<string, string | number> = {
+    page: pageParam,
+    pageSize: 12
+  }
   
   if (query) {
-    searchParams.set('q', query)
+    params.q = query
   }
-  searchParams.set('page', pageParam.toString())
-  searchParams.set('pageSize', '12')
 
-  const url = `${baseUrl}?${searchParams.toString()}`
-  const res = await fetch(url)
-  const data = await res.json() as ProductsResponse
+  const data = await fetchClient.get<ProductsResponse>('/api/products', params)
   return data.data
 }
