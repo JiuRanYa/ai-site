@@ -153,7 +153,8 @@
       "textGeneration": "Text Generation"
     },
     "resources": {
-      "title": "Resources",
+      "title": "Links",
+      "textToSvg": "Text to SVG",
       "blog": "Blog",
       "guides": "Guides",
       "community": "Community",

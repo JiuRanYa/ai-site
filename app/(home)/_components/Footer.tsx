@@ -60,10 +60,8 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold text-gray-900 mb-4">{t('resources.title')}</h3>
             <ul className="space-y-2">
-              <li><Link href="/blog" className="text-gray-600 hover:text-gray-900">{t('resources.blog')}</Link></li>
-              <li><Link href="/guides" className="text-gray-600 hover:text-gray-900">{t('resources.guides')}</Link></li>
-              <li><Link href="/community" className="text-gray-600 hover:text-gray-900">{t('resources.community')}</Link></li>
-              <li><Link href="/submit-tool" className="text-gray-600 hover:text-gray-900">{t('resources.submitTool')}</Link></li>
+              <li><Link href="https://jiuran.fun" className="text-gray-600 hover:text-gray-900">{t('resources.blog')}</Link></li>
+              <li><Link href="https://text-to-svg.tool.tokyo" className="text-gray-600 hover:text-gray-900">{t('resources.textToSvg')}</Link></li>
             </ul>
           </div>
 
