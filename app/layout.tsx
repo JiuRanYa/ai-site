@@ -91,6 +91,11 @@ export default async function RootLayout({
           src="https://www.googletagmanager.com/gtag/js?id=G-M5N0MVWPH9"
           strategy="afterInteractive"
         />
+        <Script
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6501151971558510"
+          strategy="afterInteractive"
+          crossOrigin="anonymous"
+        />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
           window.dataLayer = window.dataLayer || [];
