@@ -1,0 +1,18 @@
+# AI Navigator
+
+> 一个简洁优雅的人工智能工具导航网站，旨在帮助用户快速找到并使用最适合的AI工具。
+
+## 核心功能
+- [智能搜索](https://nexus.skin/)：快速定位所需的AI工具
+- [分类导航](https://nexus.skin/)：清晰的工具分类系统
+- [实时更新](https://nexus.skin/)：持续收录最新AI工具
+
+## 技术特点
+- [响应式设计](https://nexus.skin/)：完美适配各种设备
+- [深色模式](https://nexus.skin/)：护眼体验
+- [性能优化](https://nexus.skin/)：快速加载和流畅体验
+
+## 最新更新
+- [新增 AI 工具分类](https://nexus.skin/)：更新于2024年4月
+- [优化搜索体验](https://nexus.skin/)：更新于2024年4月
+- [支持深色模式](https://nexus.skin/)：更新于2024年4月 
